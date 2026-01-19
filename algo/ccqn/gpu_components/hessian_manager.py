@@ -21,18 +21,19 @@ class GPUHessianManager:
         # Initialize as diagonal matrix, using double precision
         return torch.eye(3 * natoms, device=self.device, dtype=torch.float64) * 70.0
 
-    def update(self, B, s, y, logfile=None):
+    def update(self, B, s, y, logfile=None, eigvals=None, eigvecs=None):
         """
         Generic update method (defaults to TS-BFGS).
         """
-        return self.update_ts_bfgs(B, s, y, logfile)
+        return self.update_ts_bfgs(B, s, y, logfile, eigvals, eigvecs)
 
-    def update_ts_bfgs(self, B, s, y, logfile=None):
+    def update_ts_bfgs(self, B, s, y, logfile=None, eigvals=None, eigvecs=None):
         """
         Pure GPU implementation of TS-BFGS update.
         """
         try:
-            eigvals, eigvecs = torch.linalg.eigh(B)
+            if eigvals is None or eigvecs is None:
+                eigvals, eigvecs = torch.linalg.eigh(B)
             # B_tilde construction ensuring positive definiteness proxy
             B_tilde = eigvecs @ (torch.diag(torch.abs(eigvals)) @ eigvecs.T)
         except RuntimeError:

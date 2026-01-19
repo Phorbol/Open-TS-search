@@ -11,9 +11,12 @@ class _HessianManager:
         if self.use_calc:
             return self.atoms.calc.get_hessian(self.atoms).reshape(3 * natoms, 3 * natoms)
         return np.eye(3 * natoms) * 70.0
-    def update_ts_bfgs(self, B, s, y, logfile):
+    def update_ts_bfgs(self, B, s, y, logfile, eigvals=None, eigvecs=None):
         try:
-            eigvals_B, eigvecs_B = eigh(B)
+            if eigvals is None or eigvecs is None:
+                eigvals_B, eigvecs_B = eigh(B)
+            else:
+                eigvals_B, eigvecs_B = eigvals, eigvecs
             B_tilde = eigvecs_B @ np.diag(np.abs(eigvals_B)) @ eigvecs_B.T
         except np.linalg.LinAlgError:
             logfile.write("Warning: Diagonalization failed in TS-BFGS update. Using B directly.\n")

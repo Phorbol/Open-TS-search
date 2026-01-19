@@ -69,9 +69,13 @@ class CCQNOptimizer(Optimizer):
         self.pos_k_minus_1 = None
         self.energy_k_minus_1 = None
         self.rho = 0.0
+        self.eigvals = None
+        self.eigvecs = None
     def converged(self, forces=None):
         return self._conv_checker.converged(self.atoms, forces, self.fmax, self.mode)
     def _initialize_hessian(self):
+        self.eigvals = None
+        self.eigvecs = None
         return self._hessian_mgr.initialize()
     def step(self, f=None):
         if f is None:
@@ -83,7 +87,7 @@ class CCQNOptimizer(Optimizer):
             s_k_prev = x_k - self.pos_k_minus_1
             y_k_prev = g_k - self.g_k_minus_1
             if np.linalg.norm(s_k_prev) > 1e-7:
-                self.B = self._hessian_mgr.update_ts_bfgs(self.B, s_k_prev, y_k_prev, self.logfile)
+                self.B = self._hessian_mgr.update_ts_bfgs(self.B, s_k_prev, y_k_prev, self.logfile, self.eigvals, self.eigvecs)
         try:
             eigvals, eigvecs, new_mode, trust_reset = self._mode_selector.select(self.B, self.mode, self.logfile, self.trust_radius_saddle_initial)
             self.mode = new_mode
@@ -94,6 +98,11 @@ class CCQNOptimizer(Optimizer):
             self.B = self._initialize_hessian()
             eigvals, eigvecs = eigh(self.B)
             self.mode = 'uphill'
+        
+        # Store for next step's BFGS update
+        self.eigvals = eigvals
+        self.eigvecs = eigvecs
+
         fmax = np.sqrt((f**2).sum(axis=1).max())
         self.logfile.write(f"Step {self.nsteps:3d}: Mode='{self.mode}', E={e_k:.4f}, Fmax={fmax:.4f}, Trust(Saddle)={self.trust_radius_saddle:.4e}\n")
         ctx = StepContext(self.atoms, self.B, g_k, x_k, e_k, eigvals, eigvecs, self.trust_radius_uphill, self.trust_radius_saddle, self.cos_phi, self.e_vector_method, getattr(self, "product_atoms", None), getattr(self, "idpp_images", 7), getattr(self, "use_idpp", False), getattr(self, "reactive_bonds", None), self.ic_mode, self.pos_k_minus_1, self.g_k_minus_1, self.energy_k_minus_1, self.logfile)

@@ -8,9 +8,61 @@ class _PRFOSolver:
         if dim == 0:
             return np.array([]), 0.0
         eps_machine = 1e-15
+        a = np.sqrt(max(a_sq, eps_machine))
+
+        # Optimization: Use secular equation for large dimensions to avoid O(N^3) diagonalization
+        if dim > 5:
+            try:
+                v = g_tilde / a
+                v_sq = v**2
+                
+                def secular_eq(mu):
+                    # f(mu) = -mu + sum(v_i^2 / (lambda_i - mu))
+                    return -mu + np.sum(v_sq / (lambdas - mu))
+
+                if mode == 'min':
+                    # Find smallest root in (-inf, min(lambdas))
+                    lambda_min = np.min(lambdas)
+                    upper = lambda_min - 1e-9
+                    lower = lambda_min - np.linalg.norm(v) - 1.0
+                    
+                    # Ensure bracketing: f(lower) should be positive (left of root)
+                    # f(upper) approaches -inf
+                    cnt = 0
+                    while secular_eq(lower) < 0 and cnt < 20:
+                        lower = lower * 2.0 if lower < 0 else lower - 10.0
+                        cnt += 1
+                    
+                    if secular_eq(lower) > 0:
+                        mu = brentq(secular_eq, lower, upper, xtol=1e-12)
+                        s_tilde = (v / (mu - lambdas)) * a
+                        epsilon = mu / 2.0
+                        return s_tilde, epsilon
+                
+                else: # mode == 'max'
+                    # Find largest root in (max(lambdas), +inf)
+                    lambda_max = np.max(lambdas)
+                    lower = lambda_max + 1e-9
+                    upper = lambda_max + np.linalg.norm(v) + 1.0
+                    
+                    # Ensure bracketing: f(upper) should be negative (right of root)
+                    # f(lower) approaches +inf
+                    cnt = 0
+                    while secular_eq(upper) > 0 and cnt < 20:
+                        upper = upper * 2.0 if upper > 0 else upper + 10.0
+                        cnt += 1
+
+                    if secular_eq(upper) < 0:
+                        mu = brentq(secular_eq, lower, upper, xtol=1e-12)
+                        s_tilde = (v / (mu - lambdas)) * a
+                        epsilon = mu / 2.0
+                        return s_tilde, epsilon
+            except (ValueError, RuntimeError):
+                # Fallback to full diagonalization if secular solver fails
+                pass
+
         H_aug = np.zeros((dim + 1, dim + 1))
         H_aug[:dim, :dim] = np.diag(lambdas)
-        a = np.sqrt(max(a_sq, eps_machine))
         H_aug[:dim, dim] = g_tilde / a
         H_aug[dim, :dim] = g_tilde / a
         try:

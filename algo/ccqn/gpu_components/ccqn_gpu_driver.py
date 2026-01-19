@@ -54,6 +54,8 @@ class CCQNGPUDriver:
         self.pos_k_minus_1 = None
         self.energy_k_minus_1 = None
         self.rho = 0.0
+        self.eigvals = None
+        self.eigvecs = None
 
     def initialize(self, natoms=None, B_init=None):
         """
@@ -61,6 +63,8 @@ class CCQNGPUDriver:
         If B_init is provided (torch tensor), it is used.
         Otherwise, initialized via HessianManager.
         """
+        self.eigvals = None
+        self.eigvecs = None
         if B_init is not None:
             self.B = B_init.to(self.device, dtype=torch.float64)
         else:
@@ -92,7 +96,7 @@ class CCQNGPUDriver:
             s_k_prev = x_curr - self.pos_k_minus_1
             y_k_prev = g_k - self.g_k_minus_1
             if torch.norm(s_k_prev) > 1e-7:
-                self.B = self._hessian_mgr.update(self.B, s_k_prev, y_k_prev, logfile)
+                self.B = self._hessian_mgr.update(self.B, s_k_prev, y_k_prev, logfile, self.eigvals, self.eigvecs)
 
         # 3. Mode Selection
         try:
@@ -106,10 +110,15 @@ class CCQNGPUDriver:
             self.B = self._hessian_mgr.initialize()
             eigvals, eigvecs = torch.linalg.eigh(self.B)
             self.mode = 'uphill'
+        
+        # Store for next step
+        self.eigvals = eigvals
+        self.eigvecs = eigvecs
 
         # 4. Prepare e_vector (early for logging)
         # If e_vec_np is not provided (e.g. mode changed to uphill), try provider
-        if self.mode == 'uphill' and e_vec_np is None and e_vector_provider is not None:
+        # Also compute for PRFO mode if available, for overlap debugging
+        if e_vec_np is None and e_vector_provider is not None:
              e_vec_np = e_vector_provider()
 
         if e_vec_np is None:
@@ -132,11 +141,11 @@ class CCQNGPUDriver:
              logfile.write(f"Driver Step {self.nsteps:3d}: {self.mode.upper()} | Input State: E={e_k:.4f}, Fmax={fmax:.4f}, MinEig={min_eig:.4e}, Trust={self._trust_mgr.get_radius():.4e}\n")
              
              # Overlap Analysis (User Request: Debug e_vector direction)
-             # Calculate overlap of e_vector with first few eigenvectors
+             # Note: This adds O(N^2) GPU compute and 1 CPU sync per step.
+             # Only calculate if e_vector is significant.
              if torch.norm(e_vec) > 1e-6:
                  # Ensure e_vector is normalized for meaningful overlap
                  e_vec_norm = e_vec / torch.norm(e_vec)
-                 # Overlap with first 3 modes
                  # Optimization: Transfer all 3 overlaps to CPU in one sync using .tolist()
                  overlaps = torch.abs(eigvecs.T @ e_vec_norm)[:3].tolist()
                  # Ensure we have enough elements
