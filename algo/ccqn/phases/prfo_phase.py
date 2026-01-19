@@ -14,7 +14,17 @@ class PRFOPhase:
             actual = ctx.e_k - ctx.prev_energy
             rho = self._rho(pred, actual)
             ctx.logfile.write(f"  PRFO Quality: rho={rho:.4f}\n")
-            new_radius = self.trust_manager.update_saddle(ctx.atoms, ctx.prev_pos, ctx.trust_radius_saddle, rho, ctx.logfile)
+            
+            # Sync trust manager with context (if not already managed internally)
+            # The trust manager is stateful now.
+            if hasattr(self.trust_manager, 'set_radius'):
+                 # Ensure it starts from correct radius if context has override?
+                 # Actually context radius usually comes from manager.
+                 # But let's assume manager is the source of truth.
+                 pass
+
+            s_norm = np.linalg.norm(s_prev)
+            new_radius = self.trust_manager.update(rho, s_norm, ctx.logfile)
             ctx.trust_radius_saddle = new_radius
         s_k = self.prfo_solver.solve(ctx.g_k, ctx.eigvals, ctx.eigvecs, ctx.trust_radius_saddle, ctx.logfile)
         return s_k, ctx.trust_radius_saddle

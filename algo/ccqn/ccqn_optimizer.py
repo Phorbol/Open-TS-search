@@ -48,11 +48,11 @@ class CCQNOptimizer(Optimizer):
         self._config = _Config(self.e_vector_method, self.ic_mode, self.cos_phi, self.trust_radius_uphill, self.trust_radius_saddle_initial, getattr(self, 'idpp_images', 7), getattr(self, 'use_idpp', False), self.hessian)
         self._state = _StateTracker()
         self._hessian_mgr = hessian_manager or _HessianManager(self.atoms, self.hessian)
-        self._mode_selector = mode_selector or CCQNModeSelector()
+        self._mode_selector = mode_selector or CCQNModeSelector(trust_radius_reset_value=self.trust_radius_saddle_initial)
         self._dir_provider = direction_provider or CCQNDirectionProvider()
         self._uphill_solver = uphill_solver or CCQNUphillSolver()
         self._prfo_solver = prfo_solver or _PRFOSolver()
-        self._trust_mgr = trust_manager or _TrustRegionManager(self.trust_radius_saddle_min, self.trust_radius_saddle_max)
+        self._trust_mgr = trust_manager or _TrustRegionManager(self.trust_radius_saddle, self.trust_radius_saddle_min, self.trust_radius_saddle_max)
         self._conv_checker = convergence_checker or CCQNConvergenceChecker()
         self._uphill_phase = UphillPhase(self._dir_provider, self._uphill_solver, {
             "e_vector_method": self.e_vector_method,
@@ -87,14 +87,22 @@ class CCQNOptimizer(Optimizer):
             s_k_prev = x_k - self.pos_k_minus_1
             y_k_prev = g_k - self.g_k_minus_1
             if np.linalg.norm(s_k_prev) > 1e-7:
-                self.B = self._hessian_mgr.update_ts_bfgs(self.B, s_k_prev, y_k_prev, self.logfile, self.eigvals, self.eigvecs)
+                self.B = self._hessian_mgr.update(self.B, s_k_prev, y_k_prev, self.logfile, self.eigvals, self.eigvecs)
         try:
-            eigvals, eigvecs, new_mode, trust_reset = self._mode_selector.select(self.B, self.mode, self.logfile, self.trust_radius_saddle_initial)
+            # Diagonalize first (consistent with new architecture)
+            eigvals, eigvecs = eigh(self.B)
+            
+            # Select mode using new signature
+            new_mode, trust_reset, reason = self._mode_selector.select(self.mode, eigvals, self.logfile)
+            
             self.mode = new_mode
             if trust_reset is not None:
                 self.trust_radius_saddle = trust_reset
-        except Exception:
-            self.logfile.write("Hessian diagonalization failed. Resetting Hessian.\n")
+                # Also update manager state
+                if hasattr(self._trust_mgr, 'set_radius'):
+                    self._trust_mgr.set_radius(trust_reset)
+        except Exception as e:
+            self.logfile.write(f"Hessian diagonalization or mode selection failed ({e}). Resetting Hessian.\n")
             self.B = self._initialize_hessian()
             eigvals, eigvecs = eigh(self.B)
             self.mode = 'uphill'

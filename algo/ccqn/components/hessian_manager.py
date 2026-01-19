@@ -11,6 +11,10 @@ class _HessianManager:
         if self.use_calc:
             return self.atoms.calc.get_hessian(self.atoms).reshape(3 * natoms, 3 * natoms)
         return np.eye(3 * natoms) * 70.0
+
+    def update(self, B, s, y, logfile, eigvals=None, eigvecs=None):
+        return self.update_ts_bfgs(B, s, y, logfile, eigvals, eigvecs)
+
     def update_ts_bfgs(self, B, s, y, logfile, eigvals=None, eigvecs=None):
         try:
             if eigvals is None or eigvecs is None:

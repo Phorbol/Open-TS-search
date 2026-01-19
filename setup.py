@@ -8,6 +8,7 @@ setup(
         "numpy",
         "scipy",
         "ase",
+        "matplotlib",
         "sella",  # Optional, for IRC
         # "pymatgen", # Optional, for IDPP
     ],
