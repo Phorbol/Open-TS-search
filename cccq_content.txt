@@ -1,0 +1,2013 @@
+Cone-Shaped Constrained Quasi-Newton Method: Efficient and
+Robust Single-Ended Transition State Optimization Algorithm
+Yinkai Wu and Haifeng Wang*
+Cite This: https://doi.org/10.1021/acs.jctc.5c01015
+ Read Online
+ACCESS
+Metrics & More
+ Article Recommendations *
+sı Supporting Information
+ABSTRACT: Efficient transition state location is a central
+challenge in heterogeneous catalysis. While single-ended methods
+are more efficient than double-ended methods, their convergence is
+often highly sensitive to the quality of the initial guess. Here, we
+propose a Cone-shaped Constrained Quasi-Newton (CCQN)
+method, which introduces a cone-shaped constraint to restrict the
+search direction, thereby effectively guiding the system from
+potential well regions toward saddle regions. After crossing the
+inflection curve, the optimization switches to the partitioned
+rational function optimization algorithm for further refinement.
+This curvature partitioned optimization strategy reduces the sensitivity to the quality of the initial guess while maintaining the
+efficiency of single-ended methods. Across 150 transition state optimization tasks with varying initial guess qualities, CCQN achieves
+an overall success rate of 93.3%, requiring only approximately 50 energy-force evaluations on average. The method exhibits strong
+robustness and convergence efficiency, offering a new tool for high-throughput transition state searches and mechanistic studies of
+complex catalytic reactions.
+1. INTRODUCTION
+The elementary reaction energy barriers, as central parameters
+in catalytic microkinetic analysis, serve as critical metrics for
+evaluating the intrinsic activity of catalysts.
+1−12
+On the
+potential energy surface (PES), the transition state (TS)
+corresponds to an energy maximum point along the minimum
+energy path (MEP) connecting two local minima. According
+to TS theory based on the harmonic approximation, this
+critical point is rigorously defined as a first-order saddle point
+(FOSP) on the PES, where the local Hessian matrix possesses
+exactly one negative eigenvalue. Compared to relaxation
+process, FOSP optimization significantly increases computa-
+tional complexity due to the requirement of curvature analysis
+on high-dimensional PES. This challenge is particularly
+pronounced in heterogeneous catalysis, where systems often
+contain dozens to hundreds of atoms, making TS searches a
+computational bottleneck in catalyst rational design. Common
+optimization strategies can be broadly classified into three
+categories: double-ended interpolation methods, single-ended
+gradient-based methods, and hybrid methods.
+Typical double-ended path interpolation methods include
+the nudged elastic band (NEB) method
+13,14
+and the growing
+string method (GSM).
+15
+Their core principle involves defining
+the reactant and product configurations as end points of the
+MEP on the PES, approximating the reaction path by inserting
+discrete sampling points. During optimization, elastic mechan-
+ical constraints are imposed between sampling points, and the
+configurations are iteratively optimized using the Broyden-
+Fletcher-Goldfarb-Shanno (BFGS) algorithm until conver-
+gence, with the final energy maximum identified as an
+approximate FOSP solution. However, this method requires
+dense path sampling near the FOSP to ensure accuracy,
+leading to significantly increased computational costs.
+Single-ended gradient-based methods primarily include the
+eigenvector-following (EF) method and the minimum-mode-
+following (MMF) method. The EF method was originally
+introduced by Cerjan and Miller
+16
+and later extended by
+Banerjee et al. into the partitioned rational function
+optimization (PRFO) algorithm.
+17,18
+This method requires
+the local Hessian matrix to strictly possess a single negative
+eigenvalue. The eigenvector corresponding to the smallest
+eigenvalue (i.e., the leftmost eigenvector) defines the direction
+of the reaction coordinates. Energy is maximized along this
+direction while minimized in orthogonal directions, enabling
+convergence to a FOSP. However, the EF method is highly
+sensitive to initial conditions, the initial guess must be
+sufficiently close to the saddle region to ensure the Hessian
+matrix contains at least one negative eigenvalue, or the
+optimization may fail. In contrast, MMF methods such as the
+dimer method
+19
+and activation-relaxation technique
+20,21
+Received: June 19, 2025
+Revised: August 28, 2025
+Accepted: August 29, 2025
+Articlepubs.acs.org/JCTC
+© XXXX American Chemical Society
+A
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+Downloaded via EAST CHINA UNIV SCIENCE & TECHLGY on September 8, 2025 at 06:08:00 (UTC).
+See https://pubs.acs.org/sharingguidelines for options on how to legitimately share published articles.
+
+iteratively extract the lowest curvature mode via finite
+difference approximations to determine the reaction coor-
+dinates. Although computationally more demanding, these
+methods are generally more robust.
+22
+However, when far from
+the FOSP, the lowest curvature mode may deviate from the
+true reaction coordinates, necessitating dynamic selection and
+tracking of different eigenvectors to avoid convergence to
+nontarget FOSPs.
+Hybrid methods enhance robustness and efficiency by
+synergizing double-ended and single-ended methods: First, a
+double-ended method (e.g., NEB) is employed to generate an
+initial guess configuration for the FOSP. The Hessian matrix is
+initialized using the reaction path tangent. Finally, EF or MMF
+methods are applied for precise FOSP refinement, achieving a
+new balance between efficiency and precision. For example,
+Asgeirsson et al.
+23
+proposed the energy-weighted climbing
+image NEB (EW-CI-NEB) method to generate an initial guess
+configuration, followed by secondary optimization with the EF
+method. This methods achieved a 100% convergence rate with
+an average of only 305 energy-force evaluations, significantly
+outperforming standalone methods.
+In heterogeneous catalysis, density functional theory (DFT)
+based TS searching remains the primary approach for
+calculating reaction energy barriers. However, a single
+energy-force evaluation at the DFT level for large atomic
+systems incurs extremely high computational costs. While
+hybrid methods are considered the current optimal strategy,
+their reliance on the double-ended method still presents a
+significant challenges in high-throughput TS searches. The EF
+method offers lower algorithmic complexity, as it simply
+modifies the step vector calculation within the quasi-Newton
+framework. Each iteration requires only one energy-force
+evaluation, making it significantly less computationally
+expensive than double-ended or MMF methods. However, as
+a classic algorithm for FOSP optimization in EF method,
+PRFO’s robustness defects stem from two main aspects:
+(1) Potential well trapping: When the system configuration
+lies in a potential well, the local potential energy surface
+is convex, with a positive semidefinite Hessian matrix
+that causes the leftmost eigenvector to point toward a
+local minimum. Since PRFO lacks an escape strategy,
+the system tends to converge to this local minimum.
+(2) Inaccurate Hessian approximation: The low accuracy
+of the approximate Hessian matrix constructed by the
+quasi-Newton method causes the step vector to deviate
+from the real reaction path. This deviation may lead the
+system to cross the inflection curve, demarcating a
+boundary between positive semidefinite and indefinite
+Hessian domains, and reenter the potential well.
+PRFO’s dependence on the indefinite Hessian matrix and
+the limitations of the quasi-Newton method in recognizing and
+maintaining negative curvature make it difficult to adapt to
+complex curvature variations on PES. Consequently, develop-
+ing strategies to simultaneously enhance initial guess robust-
+ness and computational efficiency within the quasi-Newton
+method framework remains a critical area for further
+investigation.
+To address the issue of limited accuracy in the approximate
+Hessian matrix, Hermes, E. D. et al.
+24
+employed the Jacobi−
+Davidson algorithm to iteratively diagonalize the leftmost
+eigenvector, thereby refining the Hessian matrix and
+suppressing error accumulation. Although this method can
+mitigate issues caused by the low Hessian accuracy, it cannot
+fundamentally resolve potential well trapping. When the
+system is already trapped in a potential well, refining the
+Hessian matrix has limited effectiveness. It should be noted
+that this is not to deny the validity of Hessian refinement
+strategies, but to emphasize that resolving potential well
+trapping can mitigate problems arising from inaccurate Hessian
+approximations. If the system can be pushed up into the saddle
+region, the PRFO method remains applicable, avoiding the
+extra computational cost of Hessian refinement.
+To address the problem of easily falling into local minima,
+two main strategies are commonly used. The first is the
+random perturbation approach, which continuously applies
+random disturbances to push the system across the inflection
+Figure 1. Illustration demonstrating the origin of cone-shaped constraint in the CCQN method and its optimization process. The green arrows on
+the water molecule represent the direction of O−H bond stretching. On the potential energy surface: the potential well region is represented by a
+translucent yellow surface, the saddle region by a translucent blue surface, and the inflection curve by a dotted strip. The initial state is marked with
+a diamond, transition point with a pentagram, and final state with a pentagon.
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+B
+
+curve,
+25
+where a reaction coordinate direction is randomly set,
+and the step vector is periodically adjusted along this direction
+during the search until the system successfully escapes.
+19,26
+While these methods can help the system escape potential
+wells, their inherent randomness often causes the FOSP
+optimization to converge on unintended reaction paths,
+thereby significantly limiting their practical applicability in
+heterogeneous catalysis.
+The work by Birkholz et al.
+27
+demonstrated that geometric
+variations along reaction pathways are predominantly governed
+by a limited set of structural parameters, including bond
+lengths, bond angles, and torsion angles. Building on this
+insight, when the reactive bonds involved in an elementary
+reaction are identified, modulating their lengths can effectively
+steer the system along the desired reaction pathway, enabling
+more realistic simulation of the reaction process. Bond-length-
+driven strategies, such as the bond-boost method
+28,29
+and the
+artificial force induced reaction (AFIR) method,
+30,31
+accelerate
+sampling or search efficiency by applying bond-length-based
+artificial potentials to these key reactive bonds. However, the
+empirical parametrization required for these artificial potentials
+reduces their transferability across different heterogeneous
+catalytic systems, thereby limiting the applicability of such
+strategies in heterogeneous catalysis.
+To enable a directionally guided TS optimization, this work
+introduces a Cone-shaped Constrained Quasi-Newton method
+(CCQN). The core innovation lies in a directional escape
+strategy: an approximate vector e, representing the reaction
+coordinate, is first estimated, and a spherical cone is then
+constructed with e as its axis and a half-apex angle ϕ. The
+optimal escape path is identified by locating the minimum of
+the PES within the spherical cap region. The definition of the
+axis vector e is flexible. If the reactant and product
+configurations are unknown but the mechanism is understood,
+e can be formed from stretch/compress directions of key
+reactive bonds. For example, in the dissociation of a water
+molecule, the reaction coordinate is the stretching of the O−H
+bond (the green arrow in Figure 1). The effective escape
+direction from the initial state (diamond) to the transition
+state (pentagram) typically forms an acute angle with this
+bond-stretching direction. This internal coordinate (IC)-based
+approach has been shown to approximate the true reaction
+path with chemical accuracy, offering a chemically intuitive
+basis for estimating the reaction coordinate.
+27
+When both the
+initial and final state configurations are known, the axis vector e
+can be obtained by interpolating between them. The
+introduction of the cone-shaped constraint enables the system
+to escape potential well region without relying on any
+empirical parameters.
+This design philosophy of enhancing robustness through
+directional guidance bears certain similarities to the Synchro-
+nous Transit and Quasi-Newton (STQN) method,
+32
+but the
+two differ fundamentally in their core mechanisms. STQN
+restricts each optimization step to a one-dimensional path,
+while CCQN uses a flexible high-dimensional constraint (a
+spherical cap space), allowing the optimizer to bypass energy
+barriers and explore freely without being forced to follow a
+geometric path that may not be optimal. Moreover, STQN is
+inherently a double-ended method that requires both initial
+and final states, whereas the IC-based approach in CCQN
+enables genuine single-ended applicability, broadening its
+range of application.
+In tests, the CCQN method showed good performance,
+achieving a overall success rate of 93.3% and reducing the
+computational cost by 3 to 17 times compared to the Sella and
+Dimer methods. Furthermore, the introduction of the cone-
+shaped constraint overcomes problems in current single-ended
+gradient methods, including sensitivity to initial guesses and
+inaccurate search directions. For initial configurations outside
+the saddle region, the FOSP optimization failure rate of
+CCQN is only 6.7%, showing strong robustness.
+2. THEORETICAL FOUNDATIONS OF CCQN
+2.1. Quasi-Newton Method for Unconstrained Opti-
+mization. Since this algorithm is a variant of the quasi-
+Newton method, it is necessary to briefly review the
+unconstrained quasi-Newton method.
+33
+Let us define the
+PES of a multiatom system as a function
+|
+×
+ f x x( )
+n3 1 ,
+where x denotes the Cartesian coordinates of all atoms and n is
+the number of atoms. We now introduce the following
+notations. For simplicity, the variable x will be omitted in g and
+H in the subsequent discussion:
+=
+ =
+f
+ f
+g x x
+H x x
+( ) ( )
+ ( ) ( )
+2
+The coordinates at step k + 1 are given by eq 1:
+= · +x x H g k k k k 1
+1
+(1)
+However, computing the full Hessian matrix is very
+expensive. The core idea of the quasi-Newton method is to
+construct the following recursive formula to avoid evaluating
+the full Hessian:
+= + +B B B k k k1
+(2)
+By defining B ≈ H, eq 1 can be rewritten as
+= · +x x B g k k k k 1
+1
+To ensure that B generated by eq 2 can replace H, the
+following quasi-Newton condition must be satisfied:
+= + + +g g B x x( ) k k k k k 1 1 1
+(3)
+Let x
+k+1
+- x
+k
+= s
+k
+and g
+k+1
+- g
+k
+= y
+k
+. Then, eq 3 can be
+rewritten as
+= +y B s k k k1
+2.2. Approximate Hessian Matrix Updates. The basic
+framework of the unconstrained quasi-Newton method is
+outlined in Section 2.1. It is clear that the performance of the
+quasi-Newton method strongly depends on the quality of the
+matrix update B
+k
+in eq 2. However, the construction of the
+ΔB
+k
+is not unique. For optimization tasks, ensuring that the
+search direction points toward the minimum of the objective
+function requires B
+k
+to remain positive definite throughout the
+updates. For FOSP optimization, the complexity arises from
+requiring B
+k
+to retain exactly one negative eigenvalue during
+updates. Common approximation algorithms for B
+k
+, such as
+Davidon−Fletcher−Powell (DFP) and BFGS, perform well in
+optimization problems, but their updates enforce positive
+definiteness, making them unsuitable for FOSP optimization.
+To address this, Bofill and coworkers proposed the TS-BFGS
+algorithm
+34,35
+which modifies BFGS by using the formula
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+C
+
+proposed by Greenstadt
+36
+as given in eq 4, to meet the
+requirements of FOSP optimization.
+= B M B M BTr( )
+ k k k k k M
+2
+1 1 T
+ k
+1
+(4)
+Since M
+k
+must be symmetric and positive definite, the
+general formula for ΔB
+k
+that satisfies the quasi-Newton
+condition with minimal correction is
+= + B j u u j j s u u ( ) k k k k k k k k k
+T T T T
+(5)
+where
+=
+ =
+u
+M s
+s M s
+j y B s
+k
+k k
+k k k
+ k k k k
+T
+In TS-BFGS, M
+k
+in eq 5 is defined by eq 6, which does not
+rely on any dimensionless parameters and has the same units as
+the Hessian:
+= +M y y s B s B( ) k k k k k k k
+T T
+(6)
+where
+=
+= | |
+=
+ =
+B v v
+B v v
+( )
+( )
+k
+i
+d
+k
+i
+k
+i
+k
+i
+k
+ i
+d
+k
+i
+k
+i
+k
+i
+1
+( ) ( ) ( )
+T
+ 1
+( ) ( ) ( )
+T
+and d represents the dimension of the B
+k
+matrix. This method
+is employed in this work.
+2.3. Geometry Refinement. This subsection introduces a
+method with a cone-shaped constraint for step vector
+calculation, which enables the system to climb uphill within
+potential wells. After crossing the inflection curve, the PRFO
+method is used to accurately locate the FOSP in the saddle
+region. The following discussion covers the uphill push in
+potential well regions and the FOSP optimization in saddle
+point. To simplify the mathematical formulation, the frame-
+work is presented in this section under nonperiodic boundary
+conditions. Nevertheless, since the principle of CCQN is
+independent of spatial boundaries, all derivations remain valid
+and general under periodic boundary conditions.
+2.3.1. Uphill Push in Potential Well Regions. The second-
+order Taylor expansion of the objective function f(x
+k
++ s
+k
+) is
+given in eq 7:
++ = + +f fx s x
+g s s B s( ) ( )
+1
+ 2
+k k k
+ k
+k k k k
+T T
+(7)
+While quasi-Newton method are occasionally interpreted as
+minimization (or maximization) techniques, they are funda-
+mentally root-finding algorithms. Taking the derivative of eq 7
+with respect to s
+k
+and setting it to zero gives an expression for
+refining stationary points:
+=s B g k k k
+1
+(8)
+In the unconstrained case, if B
+k
+is positive definite, the step
+vector s
+k
+typically points toward a local minimum. Conversely,
+when B
+k
+has exactly one negative eigenvalue, s
+k
+directs toward
+the FOSP. This explains why the EF method struggles to
+escape potential wells once trapped. To enforce x
+k
+to cross the
+inflection curve, constraints must be introduced into eq 7 to
+control the uphill direction. As previously discussed, the axis
+vector e
+k
+can be defined by estimating the reaction coordinates.
+A direct approach is to set x
+k+1
+= x
+k
++ e
+k
+, followed by several
+relaxations in directions perpendicular to e
+k
+, to ensure that the
+directions orthogonal to e
+k
+correspond to a local minimum on
+the PES. This is similar to the activation-relaxation
+technique.
+20,21
+However, a more efficient strategy is to directly
+solve the following optimization problem eq 9a:
+= +
+=
+s t
+s g s s B s
+s
+s
+e s
+min ( )
+1
+2
+(9a)
+. . (9b)
+ cos
+(9c)
+k
+k
+k k k k
+k k
+k
+k k
+ k
+s
+T T
+T
+k
+The constraint in eq 9b restricts s
+k
+to lie on the boundary of
+a trust-region centered at x
+k
+with radius Δ
+k
+, which ensures that
+the second-order Taylor approximation remains valid locally
+and helps prevent divergence from overstepping. Eq 9c, on the
+other hand, strictly confines s
+k
+within a spherical cone defined
+by the unit vector e
+k
+as the axis and a half-apex angle ϕ
+k
+. As
+long as ϕ
+k
+< π/2, the projection of s
+k
+onto e
+k
+remains positive,
+guiding x
+k
+into the saddle region. Noted that the constraint in
+eq 9b differs from the standard trust-region condition ∥ s
+k
+∥ ≤
+Δ
+k
+.
+37
+During the uphill phase, allowing ∥ s
+k
+∥ to be smaller
+than Δ
+k
+may cause s
+k
+to degenerate into a zero vector, which
+eliminates the climbing effect. The reason for choosing eq 9a
+as the optimization objective is to enhance the stability of the
+optimization process. The uphill direction provided by the
+cone-shaped constraint vector e
+k
+is usually coarse, and applying
+it directly to x
+k
+without adjustment may result in an
+unreasonable climbing path. In contrast, eq 9a enables dynamic
+adjustment of s
+k
+, allowing x
+k
+to follow a lower-energy path
+under constraints and improving algorithmic stability.
+Eq 9c constitutes a standard second-order cone constraint,
+thus preserving the problem’s convex structure. However, the
+equality constraint defined by eq 9b leads to a nonconvex
+feasible set, which causes the overall optimization problem to
+lose its convexity. Although the problem exhibits nonconvexity
+and nonlinear constraints, analytical gradients can be derived
+for both the objective function eq 9a and all constraints eq 9a
+to eq 9c. This provides a solid foundation for applying the
+augmented Lagrangian method (ALM).
+38
+Nevertheless, due to
+the nonconvex feasible domain, the ALM cannot guarantee
+convergence to global optima and typically yields local optimal
+solutions. Notably, a local optimum suffices for practical uphill
+process.
+The adjustment of parameters e
+k
+, Δ
+k
+, and ϕ
+k
+in the
+optimization problem eq 9a will be discussed in Section 2.3.3.
+For the purpose of the following discussion, which focuses
+solely on the k-th step of the quasi-Newton method, these
+parameters are regarded as constants within the ALM
+algorithm. To simplify the notation, the subscript k is omitted.
+The augmented Lagrangian function is formulated as follows:
+= +
++
++ { +
+}
+ƒ
+ «
+≈
+≈
+≈
+≈
+≈
+≈
+≈
+ ≈ ≈ ≈
+…
+ ÷
+—
+—
+—
+—
+—
+—
+—
+ — — —
+s e s s s
+s e s
+( , , ; , , , ) (
+) ( )
+2
+( )
+ 2
+max ( cos ),
+0
+2
+T 2
+2
+2
+Here, λ and μ are Lagrange multipliers for the equality and
+inequality constraints, σ > 0 is the penalty parameter. The
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+D
+
+constrained problem eq 9a becomes the unconstrained form eq
+10:
+s emin max (
+, , ; , , , )
+ s ,
+(10)
+The pseudo code of the ALM for solving s is outlined in
+Algorithm 1.
+2.3.2. Optimization in Saddle Regions. After x
+k
+successfully
+escapes from a locally convex region, using eq 8 to locate the
+TS often results in a step size that is too large, exceeding the
+valid range of the second-order expansion. Improper scaling of
+s
+k
+, however, may increase iteration counts or cause
+divergence.
+17,18
+The restricted step PRFO method has been
+widely validated as efficient and robust. It builds on the
+rational function optimization (RFO) framework by replacing
+the Taylor expansion with a Pade ́ approximation near x
+k
+. eq 7
+can then be reformulated as
+= +
+=
++
++
+=
+i
+k
+j
+j
+j
+j
+j
+j
+y
+{
+z
+z
+z
+z
+z
+z
+i
+ k
+j
+j
+ j
+y
+ {
+z
+z
+ z
+( )
+ ( )
+f fs x s x
+g s s B s
+s W s
+s
+B g
+g
+s
+s
+W
+s
+( ) ( ) ( )
+1
+(
+1
+)
+0
+1
+2(
+1
+)
+0
+ 0 1 1
+k k k k k
+k
+k k k k
+k k k
+k
+k
+k
+k
+k
+k
+k
+k
+T
+1
+2
+T
+T
+T
+T
+T
+(11)
+where W
+k
+= a
+−2
+I(a > 0). Applying the condition ∂ϵ
+k
+/∂s
+k
+= 0
+to eq 11, yields an eigenvalue equation (with subscript k
+omitted):
+=
+i
+k
+j
+j
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+z
+ z ( ) ( )
+a a
+ a
+a a
+B g
+ g
+s s
+ 0
+/
+ 1
+2
+/
+ 1
+2
+T
+(12)
+Therefore, RFO converts an optimization problem into an
+eigenvalue problem. For minimization tasks, the solution can
+be derived from the leftmost eigenvector of B. For FOSP
+optimization, one may choose the second smallest eigenvalue
+and its corresponding eigenvector to define the step vector s,
+but in practice, this strategy often fails to reliably locate the
+FOSP.
+17
+Considering the nature of saddle points, a μ-order
+saddle point is a maximum along the directions of the first μ
+smallest eigenvalues of the Hessian matrix, and a minimum
+along the directions of the remaining 3n - μ larger eigenvalues.
+Therefore, eq 12 can be separated into two parts: maximizing ϵ
+along the chosen μ eigenvectors, and minimizing ϵ along the
+remaining 3n - μ eigenvectors. First, diagonalize B:
+=
+i
+ k
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+i
+ k
+j
+j
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+z
+z
+B
+Q Q
+Q
+ Q
+( )
+0
+0
+max min
+max
+min
+max
+T
+ min
+T
+(13)
+Here, Q
+max
+and Λ
+max
+contain the eigenvectors and
+eigenvalues of the smallest μ modes, while Q
+min
+and Λ
+min
+correspond to the remaining 3n - μ modes. Based on this
+decomposition, s and g can then be partitioned into
+corresponding subspaces:
+= +s Q s Q s max max min min
+(14)
+= +g Q g Q g max max min min
+(15)
+After this separation is performed, the PRFO algorithm
+constructs two equations similar to eq 12 to solve for s ̃
+min
+and
+s ̃
+max
+:
+=
+i
+k
+j
+j
+j
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+z
+z
+ z
+i
+ k
+j
+j
+j
+y
+ {
+z
+z
+z
+i
+ k
+j
+j
+j
+y
+ {
+z
+z
+z
+a a
+ a
+a a
+g
+ g
+s s
+ 0
+/
+ 1
+2
+/
+ 1
+2
+max
+max
+ max
+T
+max
+max
+max
+(16)
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+E
+
+=
+i
+k
+j
+j
+j
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+z
+z
+ z
+i
+ k
+j
+j
+j
+y
+ {
+z
+z
+z
+i
+ k
+j
+j
+j
+y
+ {
+z
+z
+z
+a a
+ a
+a a
+g
+ g
+s s
+ 0
+/
+ 1
+2
+/
+ 1
+2
+min
+min
+ min
+T
+min
+min
+min
+(17)
+Here, ϵ
+max
+and ϵ
+min
+correspond to the largest and smallest
+eigenvalues in eqs 16 and 17, respectively. Once s ̃
+min
+and s ̃
+max
+are obtained, the update step vector s can be computed using
+eq 14. It should be noted that s is still a function of a at this
+stage. To ensure the step vector lies within the trust-region of
+radius Δ, we need to find a suitable value of a such that ∥ s ∥ ≤
+Δ. Using eqs 13 to 17, we can construct a function r(a) = s
+T
+s:
+=
+=
++
+=
++
+=
++
+ = = +
+r a
+a
+a
+ a a
+s s
+s s s s
+g I g g
+I g
+g g
+( )
+(
+2
+)
+(
+2
+)
+(
+2
+) (
+2
+)
+ i
+i
+i
+ i
+n
+i
+i
+T
+max
+T
+max min
+T
+min
+max
+T
+max
+max
+2
+2
+max min
+T
+min
+min
+2
+2
+min
+ 0
+2 max
+2
+2
+ 1
+3
+2
+min
+2
+2
+Since ϵ
+max
+> 0 and ϵ
+min
+< 0, and their signs are consistent
+with those of λ
+i
+, the function r(a) is strictly monotonically
+increasing over the domain (0, + ∞), with a range of (0,
+g
+T
+B
+−2
+g). Therefore, when the saddle point lies outside the
+trust-region, we can use a bisection method to find a unique
+value of a such that ∥ s ∥ = Δ, allowing the algorithm to take
+the largest possible step and rapidly converge near the FOSP.
+When the saddle point is within the trust-region, PRFO
+reduces to eq 8 and can still reliably converge to the FOSP.
+2.3.3. Update Strategy for Parameters. This work employs
+two distinct strategies to determine the axis vector e: an IC-
+based approach and an interpolation-based approach. When
+the reactant and product configurations are unknown but the
+reaction mechanism is understood, the IC-based approach is
+applied. In this case, e is defined as a linear combination of the
+stretching/compression directions of the reactive bonds. As
+shown in Figure 2, when the bond length l ∈ (a,b), the atoms
+are in an attractive state, and e points in the stretching
+direction. When l ∈ (b,c), the atoms are in a repulsive state,
+and e points in the compression direction. The pseudocode for
+computing e is given in Algorithm 2, where the superscript (i)
+denotes the i-th column of a matrix.
+When both the initial and final state configurations are
+known, an interpolation-based approach can be used to
+estimate the reaction coordinate, making the acquisition of
+the vector e a completely black box process that requires no
+input. A reaction path between the current and product
+configurations can be generated using nonlinear interpolation
+techniques such as the image-dependent pair potential
+(IDPP).
+39
+The midpoint of this path (x
+mid
+) serves as the
+initial guess for the saddle point. The vector from the current
+position x to x
+mid
+provides an effective estimate of the reaction
+coordinate, and the axis vector e is defined by eq 18:
+=
+e
+x x
+ x x
+mid
+ mid
+(18)
+In the potential well, the parameters Δ and cosϕ are fixed.
+The selection of cosϕ is related to to the definition of the axis
+vector e. In the IC-based approach, a small cosϕ is typically
+chosen to limit excessive bond-length changes and maintain
+stability during uphill push. In contrast, the interpolation-based
+approach requires a larger cos ϕ to enforce a strong directional
+constraint, guiding the optimization toward the target region.
+The choice of Δ depends on PES topography: narrower, flatter
+saddle regions require smaller Δ values to ensure robustness,
+while broader, more curved saddle regions benefit from larger
+Δ values to improve efficiency. All Δ and cosϕ values used in
+this study are listed in the Supporting Information.
+When the system enters the saddle region, an automated
+strategy is used to determine Δ. After each step, the ratio
+between the predicted and actual energy change is evaluated:
+=
++
+g s s B s
+k
+k k k k
+ k
+T
+1
+2
+T
+(19)
+If
+inc
+1
+ inc , the quadratic approximation is considered
+to closely match the true potential surface (i.e., ρ ≈ 1), and the
+trust radius can be safely increased to Δ
+k+1
+= min{σ
+inc
+Δ
+k
+, δ
+max
+},
+where σ
+inc
+> 1 is a scaling factor and δ
+max
+imposes an upper
+bound to prevent unbounded growth of the radius. If
+dec
+1
+or ρ ≥ ρ
+dec
+, the trust radius should be reduced to Δ
+k+1
+=
+max{σ
+dec
+Δ
+k
+, δ
+min
+}, where σ
+dec
+< 1, and a lower bound δ
+min
+to
+suppress noise sensitivity in ϵ
+k
+eq 19. In all other cases, the
+trust radius remains unchanged. The thresholds must satisfy 1
+< ρ
+inc
+< ρ
+dec
+to ensure proper scaling. This adaptive strategy
+achieves a balance between convergence efficiency and
+numerical stability.
+2.4. Summary of CCQN Method. The workflow of the
+CCQN algorithm is shown in Figure 3. The algorithm starts by
+initializing the system coordinates x
+0
+, the gradient g
+0
+, and the
+approximate Hessian matrix B
+0
+(typically a scaled identity
+matrix). At each iteration, the method for computing the step
+vector s
+k
+is divided into two modes based on the properties of
+the current Hessian matrix B
+k
+: (i) if B
+k
+is positive definite, the
+system is in a potential well, and the cone-shaped constraint
+method is applied to perform the uphill push; (ii) if B
+k
+is
+indefinite, indicating the system has crossed the inflection
+curve into the saddle region, switch to the PRFO method.
+Finally, check if the convergence criteria are met. Terminate
+the calculation if satisfied; otherwise, proceed to the next
+iteration.
+Figure 2. Schematic diagram illustrating the relationship between
+interatomic force directions and bond stretching/compression
+directions. The blue curve represents the simplified potential energy
+profile as a function of bond length, with three dashed lines
+corresponding to different equilibrium bond length values. Within the
+metastable region a < r < c, the direction of bond length change is
+always opposite to the interatomic force, which drives the bond length
+toward the value b.
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+F
+
+3. RESULTS AND DISCUSSION
+3.1. Heterogeneous Catalysis Test Set. Fischer−
+Tropsch synthesis (FTS),
+40−42
+as a key technology for directly
+converting syngas (CO/H
+2
+) into light olefins, holds significant
+research value in the field of heterogeneous catalysis. The FTS
+reaction network involves typical elementary steps such as C−
+C coupling, C−O bond cleavage, and dehydrogenation/
+hydrogenation, covering nearly all key reaction pathways in
+C1/C2 small-molecule catalytic transformations.
+5
+To system-
+atically evaluate the performance of different single-ended
+gradient methods, a benchmark test set of 30 elementary FTS
+reactions (see Table 1) was constructed on a Cu(111) surface.
+For each reaction, five initial guess configurations are
+sampled via linear interpolation (Figure 4a), with the
+construction formula x
+guess
+= x
+saddle
++ α · v, where x
+saddle
+denotes the real TS configuration, v represents the displace-
+ment vector pointing from the FOSP to a local minimum, and
+α ∈ {0.1, 0.15, 0.2, 0.25, 0.3}. The coefficient α controls the
+deviation of the initial guess configuration from the TS. This
+strategy generates 150 optimization tasks (30 reactions × 5
+initial guesses), providing a standardized test set for evaluating
+the reliability and convergence efficiency of single-ended
+methods.
+3.2. Benchmarks and Performance. To systematically
+evaluate the performance of the CCQN method in TS
+searches, two representative single-ended optimization algo-
+rithms were selected as baselines: Sella,
+24,43,44
+which is based
+on the PRFO approach, and the Dimer method,
+19
+which
+represents the MMF method. All optimization algorithms used
+VASP
+45,46
+as the energy-force calculator with identical
+computational settings. CCQN uses an IC-based approach to
+Figure 3. Workflow of CCQN method.
+Table 1. List of Elementary Reactions Used in This Dataset
+id Reaction id Reaction
+R1 O
+2
+* + * ⇌ O* + O* R16 CH
+2
+* + H* ⇌ CH
+3
+* + *
+R2 H
+2
+O* + * ⇌ H* + OH* R17 CH
+3
+* + H* ⇌ CH
+4
+* + *
+R3 CO* + H* ⇌ COH* + * R18 CH* + OH* ⇌ CH
+2
+* + O*
+R4 CHO* + H* ⇌ CH
+2
+O* + * R19 CH
+2
+* + OH* ⇌ CH
+3
+* + O*
+R5 CHO* + H* ⇌ CHOH* + * R20 CH
+3
+* + OH* ⇌ CH
+4
+* + O*
+R6 COH* + H* ⇌ CHOH* + * R21 CH
+2
+CH
+2
++ * ⇌ CH
+2
+CH* + H*
+R7 CH
+2
+O* + H* ⇌ CH
+3
+O* + * R22 CH
+2
+CH* + * ⇌ CHCH* + H*
+R8 CH
+2
+O* + H* ⇌ CH
+2
+OH* + * R23 CHCH* + * ⇌ CH* + CH*
+R9 CHOH* + H* ⇌ CH
+2
+OH* + * R24 CH
+2
+CH* + * ⇌ CH
+2
+* + CH*
+R10 CHO* + * ⇌ CH* + O* R25 CH
+2
+* + CO* ⇌ CH
+2
+CO* + *
+R11 CH
+2
+O* + * ⇌ CH
+2
+* + O* R26 CH
+3
+* + CO* ⇌ CH
+3
+CO* + *
+R12 CH
+3
+O* + * ⇌ CH
+3
+* + O* R27 CH
+3
+CO* + O* ⇌ CH
+2
+CO* + OH*
+R13 CHOH* + * ⇌ CH* + OH* R28 COCHO* + * ⇌ CO* + CHO*
+R14 CH
+2
+OH* + * ⇌ CH
+2
+* + OH* R29 CO* + O* ⇌ CO
+2
+* + *
+R15 CH* + H* ⇌ CH
+2
+* + * R30 COOH* + * ⇌ CO
+2
+* + H*
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+G
+
+define the axis vector e. Detailed computational settings are
+provided in the Supporting Information. The evaluation
+framework includes four key metrics: FOSP search success
+rate, false positive rate, convergence efficiency, and potential
+well escape robustness, to comprehensively assess the practical
+performance of different methods on the standard test set.
+First, we performed a systematic analysis of the success rate
+for TS searches. Under a maximum limit of 1000 energy-force
+evaluations, an optimization is counted as successful only if the
+following criteria are all satisfied: (1) the maximum atomic
+force satisfies |F
+max
+| < 0.05 eV/Å; (2) Only one imaginary
+frequency with wavenumber exceeding 200 cm
+−1
+exists; and
+(3) Run intrinsic reaction coordinate calculations to ensure
+that the transition state lies on the target reaction path. As
+shown in Figure 4b, the CCQN method achieves high success
+rates across varying initial guess qualities. At α = 0.1, the
+success rate reaches 96.67%, and it remains stable at 93.33%
+even under poor initial guess conditions (0.15 ≤ α ≤ 0.3). In
+contrast, both the Sella and Dimer methods show strong
+dependence on initial guess quality, with success rates
+decreasing as α increases. This trend is consistent with the
+underlying mathematical principles of these methods: when far
+from the saddle point region, the leftmost eigenvector may not
+reliably align with the correct reaction coordinate, increasing
+the risk of optimization failure. Further analysis of false
+positives (Figure 4b) classifies systems optimized to a FOSP as
+positive. Among these, those on the target reaction path are
+true positives (TP), while deviations from the target reaction
+path are false positives (FP). Systems that fail to converge to a
+FOSP are considered true negatives (TN). The statistics show
+that both Sella and Dimer yield false positives in certain cases,
+revealing that traditional single-ended methods may converge
+to nontarget FOSPs when blindly following the leftmost
+eigenvector, especially with low-quality initial guesses. In
+contrast, CCQN achieves a 0% false positive rate across all
+tests, with no FOSPs deviating from the target reaction path,
+clearly demonstrating the strength of the cone-shaped
+constraint strategy in guiding optimization direction and
+ensuring convergence reliability.
+In terms of convergence efficiency, this study uses the
+average number of energy-force evaluations as the comparison
+metric. As shown in Figure 4d, the computational cost of all
+methods increases as the initial guess quality deteriorates.
+However, CCQN shows the smallest increase and maintains
+the lowest average number of energy-force evaluations across
+all α values. In particular, under the most challenging condition
+of α = 0.30, the average number of evaluations required by
+CCQN is only 18.3% of that of Sella and 7.3% of that of
+Dimer, demonstrating very high convergence efficiency. The
+difference originates from the computational cost per iteration:
+both Sella and CCQN are EF methods that require only one
+energy-force evaluation per step, whereas the dimer method
+involves multiple finite-difference calculations to update the
+dimer orientation, significantly increasing the overall cost. This
+trend is consistent with previous reports.
+22
+Additionally, Sella
+has a higher computational cost than CCQN because it
+periodically refines the approximate Hessian matrix using finite
+differences. In contrast, CCQN uses a cone-shaped constraint
+to restrict the search direction, allowing it to tolerate larger
+errors in the approximate Hessian matrix during the early
+stages of optimization, thereby maintaining the superlinear
+convergence rate of quasi-Newton method.
+To quantitatively evaluate the effectiveness of the cone-
+shaped constraint strategy in enabling potential well escape,
+Figure 4. An illustration of the initial guess configuration and different algorithms performance on a standardized test set. (a) Initial Guess
+Configuration: Points are inserted between saddle and minimum points based on α. (b) Success Rate of Finding True FOSP: The y-axis represents
+the success rate in percentage, while the x-axis shows different values of α. (c) The y-axis displays the counts of True Positives (TP), False Positives
+(FP), and True Negatives (TN) for FOSP identified by different algorithms. (d) Average Number of Energy-Force Evaluations: The y-axis
+indicates the average count of energy-force evaluations, with the x-axis representing different values of α.
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+H
+
+this study introduces two metrics: sensitivity and robustness
+score. Due to the difficulty in directly tracking each trapping
+event, the initial configurations are classified based on whether
+they have an imaginary frequency with wavenumber above 200
+cm
+−1
+. Configurations with such frequencies are labeled as
+“saddle initial guess”, while the rest are considered “potential
+well initial guess”. Successful convergence to the target FOSP
+is used as the criterion for a successful escape. Sensitivity is
+defined as the normalized difference in success rates (SR)
+between the two types of initial guesses:
+=
+|
+|
+ { }
+Sensitivi
+ty
+SR SR
+ max SR , SR
+saddle wel
+l
+ saddle wel l
+(20)
+A lower sensitivity indicates that the algorithm is less
+dependent on the quality of the initial guess and has a stronger
+ability to escape potential well. The robustness score takes into
+account both the average overall success rate and the
+sensitivity, and is defined as
+= ×Robustnes s Score SR (1 Sensiti vity) avg
+(21)
+As shown in Table 2, CCQN achieved high success rates of
+100.00% and 83.33% under saddle and potential well initial
+guesses, respectively. With a sensitivity of only 0.1667,
+resulting in a robustness score as high as 0.7833. In contrast,
+the success rates of the Sella and Dimer methods declined
+significantly when the quality of the initial guess decreased,
+with sensitivity values reaching 0.7193 and 0.5214, respec-
+tively, and corresponding robustness scores of only 0.1235 and
+0.1053. These results clearly validate the effectiveness of the
+cone-shaped constraint strategy in enhancing potential well
+escape capability and reducing dependence on initial guesses.
+To assess the performance of the CCQN method in more
+practical conditions, we conducted supplementary tests. Five
+reactions (R1-R5) were selected, with random noise
+introduced into their initial configurations to simulate more
+challenging optimization tasks. The results (detailed in the
+Section S2.1) demonstrate that CCQN maintained consis-
+tently good performance under these conditions. It achieved a
+convergence success rate of 96%, significantly outperforming
+Sella (44%) and Dimer (24%). In terms of computational
+efficiency, the average number of energy-force evaluations
+required by CCQN was comparable to Sella’s and 12% of that
+required by Dimer. Furthermore, a comparison with the NEB
+method on the same set of reactions (see Section S2.1) shows
+that NEB required an average of 2,550 energy-force evaluations
+to meet the same convergence criteria, whereas the computa-
+tional cost of CCQN was only about one-fiftieth of that of
+NEB.
+In summary, CCQN outperforms the baseline methods
+across four key performance metrics: FOSP search success rate,
+false positive rate, convergence efficiency, and potential well
+escape robustness. Particularly in the tests with noisy initial
+configurations, CCQN maintained its performance, indicating
+its reliability for practical applications. Compared to the widely
+used NEB method, CCQN improves the convergence
+efficiency by a factor of approximately 50 without compromis-
+ing accuracy. These improvements are attributed to the cone-
+shaped constraint strategy, which enhances the robustness and
+efficiency of the TS search process by providing effective
+directional guidance. The raw data supporting the figures
+presented in this subsection are available in Tables S2−S4.
+Detailed convergence results and frequency analyses for all
+optimization tasks are provided in Tables S8−S13.
+3.3. Some Additional Examples. This section aims to
+comprehensively demonstrate the applicability and perform-
+ance of the CCQN method in diverse chemical contexts. The
+content covers conformational transitions, the main-group
+molecular reactions benchmark tests, and TS search in
+complex interface systems.
+3.3.1. Conformational Transitions. We first evaluated
+CCQN’s performance in locating conformational transition
+states. For such systems, where defining specific reactive bonds
+is difficult, the axis vector e was determined uniformly using
+the interpolation-based approach. As shown in Figure 5a−c,
+three representative cases were examined. (1) For the internal
+rotation of CH
+3
+CH
+3
+around the C−C σ-bond, the transition
+state corresponds to the eclipsed conformation. CCQN
+successfully located this configurations after 108 energy-force
+evaluations, using two adjacent staggered conformations as the
+initial and final states. (2) For the umbrella inversion of NH
+3
+,
+using “down” and “up” stable conformations as the initial and
+final states, CCQN converged to the planar transition state in
+24 evaluations. (3) In surface science, migration barriers are
+important for understanding adsorbate diffusion. We used the
+migration of an O atom between two adjacent hollow sites on a
+Cu(111) surface as a case study. CCQN located the transition
+state after 69 evaluations, demonstrating its applicability to
+surface diffusion studies.
+3.3.2. Main-Group Molecular Reactions. To evaluate
+CCQN’s performance on molecular systems, we used the
+main-group molecular reactions benchmark set.
+23
+This data set
+contains 121 reactions and provides reference results for the
+hybrid NEB-TS method (EW-CI-NEB combined with EF
+optimization). Since the data set includes initial and final state
+configurations, the axis vector e was defined using the
+interpolation-based approach. On this test set, CCQN
+achieved a convergence rate of 91.8%, with 91.1% of the
+converged configurations being FOSPs, requiring an average of
+only 152.8 energy-force evaluations. Compared with the hybrid
+NEB-TS method (100% convergence, 92% FOSPs), CCQN
+maintained a similar convergence rate while reducing the
+computational cost by about 50% (NEB-TS averaged 305
+evaluations). This suggests that CCQN offers a balanced trade-
+off between convergence efficiency and accuracy. Notably, we
+observed that when dealing with nonelementary reactions,
+Table 2. Potential Well Escape Robustness Evaluation
+Method Initial Guess Quality Success Count Failed Count Success Rate Sensitivity Robustness Score
+CCQN Saddle 96 0 100.00% 0.1667 0.7833
+Potential Well 45 9 83.33%
+Sella Saddle 57 39 59.38% 0.7193 0.1235
+Potential Well 9 45 16.67%
+Dimer Saddle 26 70 27.08% 0.5214 0.1053
+Potential Well 7 47 12.96%
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+I
+
+CCQN may not converge to the highest-energy saddle point
+along the full reaction path. This arises because CCQN
+switches to a local saddle point search via PRFO upon entering
+any saddle region, without considering the global maximum
+barrier. In principle, this could be addressed by scanning the
+entire path along the cone-shaped constrained direction and
+recording all saddle regions for subsequent searches. However,
+this falls within the scope of reaction path scanning and is not
+discussed further in this work. Figure 5d−f show results for
+three example reactions (id 29, 100, and 102), with complete
+statistics and discussion in Section S2.2.
+3.3.3. Complex Interface Systems. To probe the perform-
+ance of CCQN in more challenging catalytic systems, we
+applied it to an Ag−Au alloy cluster, an Al-doped SiO
+2
+zeolite,
+and a TiO
+2
+surface that included an explicit water model (see
+Figure 5g−i). For these systems with complex potential energy
+surfaces, CCQN converged in 99, 185, and 75 energy-force
+evaluations, respectively. In these tests, the reactive bond were
+well-defined, allowing the axis vector e to be defined using the
+IC-based approach, with optimizations starting from manually
+prepared initial configurations.
+Collectively, these results indicate that CCQN is applicable
+to TS searches across a range of complex chemical systems.
+Detailed computational settings for the above test cases are
+provided in the Supporting Information.
+4. CONCLUSION
+This study proposes the cone-shaped constrained quasi-
+Newton method, which introduces a curvature partitioned
+optimization strategy. It inherits the computational efficiency
+and convergence accuracy of the EF method while significantly
+reducing dependence on high-quality initial guesses.
+Test results show that CCQN achieved an overall success
+rate of 93.3% on a standard benchmark set, and still
+maintained a high success rate of 83.3% under poor initial
+guesses. In addition, the average number of energy-force
+evaluations required by CCQN is only 21.6% of that required
+by Sella and 6.6% of that required by Dimer, demonstrating
+excellent computational efficiency. In false positive analysis,
+CCQN exhibited a low false positive rate for FOSP
+identification, indicating that the cone-shaped constraint can
+effectively guide the reaction path even when the config-
+urations of reactants and products are unknown. This helps
+overcome the directional search limitations of single-ended
+methods compared to double-ended methods. To further
+quantify its ability to escape potential wells, this work uses eqs
+20 and 21 to compare the robustness of CCQN against
+baseline methods. The results show that CCQN has a stronger
+ability to escape potential wells than baseline methods,
+confirming that the cone-shaped constraint is a reliable
+strategy for single-ended TS searches. Moreover, case studies
+on systems such as metal clusters, doped zeolites, and metal
+oxide surfaces further demonstrate the applicability and
+convergence performance of CCQN across diverse material
+types. In supplementary tests with noisy initial configurations,
+the success rate of CCQN remained at 96%. Furthermore,
+compared to the widely used NEB method, CCQN also
+demonstrated high efficiency.
+Another advantage of this method is its flexibility. By
+incorporating the interpolation-based approach, CCQN can,
+much like a double-ended method, use initial and final state
+information to define the constraint direction with almost no
+additional computational cost. This flexibility extends its
+applicability beyond traditional single-ended methods, showing
+robust performance across diverse chemical systems.
+Although CCQN performs well in most cases, Sella and
+Dimer converge with fewer energy-force evaluations when the
+initial guess is of high quality. This is because CCQN initializes
+the approximate Hessian with a scaled identity matrix,
+requiring iterative refinement of the leftmost eigenvector,
+whereas Sella and Dimer construct it directly via finite
+differences, enabling faster and more stable convergence.
+Thus, when high-quality initial guesses are available, Sella or
+Dimer may be more efficient.
+Overall, this study shows that CCQN is a robust and
+efficient single-ended TS optimization method. It offers a new
+solution for high-throughput transition state screening in
+heterogeneous catalysis and other fields, and may help
+accelerate the rational design and discovery of new materials
+and catalysts.
+■
+ASSOCIATED CONTENT
+Data Availability Statement
+This work is built upon multiple open-source software
+packages and tools, with the Sella (https://github.com/
+zadorlab/sella) and the ASE
+47
+(https://gitlab.com/ase/ase)
+making core contributions to the project. Data and code will be
+made publicly available at gitee.com/yinkaaiwu. Alternatively, a
+preview version can be requested via e-mail.
+*
+sı
+Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acs.jctc.5c01015.
+Figure 5. Additional examples of CCQN optimization results. (a)
+Internal rotation TS of the C−C σ-bond in CH
+3
+CH
+3
+. (b) Umbrella
+inversion, NH
+3
+(downward) → planar TS → NH
+3
+(upward). (c)
+Adsorbed oxygen migration between adjacent fcc hollow sites on the
+Cu(111) surface. (d) The intramolecular hydrogen transfer reaction
+CH
+3
+CHO ⇌ H
+2
+CCHOH. (e) The ring-forming reaction N
+2
+O +
+CH
+2
+CH
+2
+⇌ C
+2
+H
+2
+N
+2
+O. (f) The intramolecular hydrogen transfer
+reaction HCN ⇌ HNC. (g) Reaction HOCH
+2
+∗ + ∗ ⇌ HO ∗ +
+CH
+2
+* on an Ag−Au alloy cluster. (h) The dehydrogenation reaction
+CH
+2
+CH
+3
+∗ + ∗ ⇌ CH
+2
+CH
+2
+∗ + H∗ on Al-doped SiO
+2
+zeolite. (i) The
+liquid/solid interface reaction H
+2
+O∗ + H
+2
+O ⇌ OH∗ + H
+3
+O
++
+on a
+TiO
+2
+surface with explicit water molecules introduced.
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+J
+
+Detailed computational settings for all tests, including
+VASP and ORCA calculation parameters, optimizer
+configurations, and frequency analysis settings; supple-
+mentary noise tests and NEB tests for the heterogeneous
+catalysis test set; additional figures and discussion for the
+main-group molecular reactions benchmark set; vibra-
+tional frequency analyses and computational cost
+statistics for all optimization results (PDF)
+■
+AUTHOR INFORMATION
+Corresponding Author
+Haifeng Wang − State Key Laboratory of Green Chemical
+Engineering and Industrial Catalysis, Center for
+Computational Chemistry and Research Institute of
+Industrial Catalysis, East China University of Science and
+Technology, Shanghai 200237, People’s Republic of China;
+orcid.org/0000-0002-6138-5800; Email: hfwang@
+ecust.edu.cn
+Author
+Yinkai Wu − State Key Laboratory of Green Chemical
+Engineering and Industrial Catalysis, Center for
+Computational Chemistry and Research Institute of
+Industrial Catalysis, East China University of Science and
+Technology, Shanghai 200237, People’s Republic of China;
+orcid.org/0009-0008-4398-7585
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acs.jctc.5c01015
+Notes
+The authors declare no competing financial interest.
+■
+ACKNOWLEDGMENTS
+This work was supported by the National Key R&D Program
+of China (2021YFA1500700), National Natural Science
+Foundation of China (22525202), and the Fundamental
+Research Funds for the Central Universities. We thank Prof.
+Yi Zhang (School of Mathematics, East China University of
+Science and Technology) for reviewing this manuscript and for
+providing several helpful comments regarding its presentation.
+■
+REFERENCES
+(1) Campbell, C. T. Finding the Rate-Determining Step in a
+Mechanism: Comparing DeDonder Relations with the “Degree of
+Rate Control”. J. Catal 2001, 204, 520−524.
+(2) Chen, J.; Jia, M.; Hu, P.; Wang, H. CATKINAS: A Large-Scale
+Catalytic Microkinetic Analysis Software for Mechanism Auto-
+Analysis and Catalyst Screening. J. Comput. Chem 2021, 42, 379−391.
+(3) Cortright, R. D.; Dumesic, J. A. Kinetics of heterogeneous
+catalytic reactions: Analysis of reaction schemes. Adv. Catal. 2001, 46,
+161−264.
+(4) Dumesic, J. A. Analyses of Reaction Schemes Using De Donder
+Relations. J. Catal 1999, 185, 496−505.
+(5) Lai, Z.; Sun, N.; Jin, J.; Chen, J.; Wang, H.; Hu, P. Resolving the
+Intricate Mechanism and Selectivity of Syngas Conversion on
+Reduced ZnCr
+2
+O
+x
+: A Quantitative Study from DFT and Microkinetic
+Simulations. ACS Catal 2021, 11, 12977−12988.
+(6) Lai, Z.; Chen, J.; Jia, M.; Hu, P.; Wang, H. Universal Skeleton
+Feature of the Three-Dimensional Volcano Surface and the
+Thermodynamic Rule in Locating the Catalyst in Heterogeneous
+Catalysis. ACS Catal 2022, 12, 247−258.
+(7) Lai, Z.; Wang, H. General Rules of Active Zone on the Three-
+Dimensional Volcano Surface Enables Rapid Location of Efficient
+Catalyst. J. Catal 2023, 417, 453−461.
+(8) Mao, Z.; Campbell, C. T. The Degree of Rate Control of
+Catalyst-Bound Intermediates in Catalytic Reaction Mechanisms:
+Relationship to Site Coverage. J. Catal 2020, 381, 53−62.
+(9) Nørskov, J. K.; Bligaard, T.; Rossmeisl, J.; Christensen, C. H.
+Towards the Computational Design of Solid Catalysts. Nat. Chem
+2009, 1, 37−46.
+(10) Stegelmann, C.; Andreasen, A.; Campbell, C. T. Degree of Rate
+Control: How Much the Energies of Intermediates and Transition
+States Control Rates. J. Am. Chem. Soc 2009, 131, 8077−8082.
+(11) Stoltze, P. Microkinetic Simulation of Catalytic Reactions. Prog.
+Surf. Sci 2000, 65, 65−150.
+(12) Vojvodic, A.; Nørskov, J. K. New Design Paradigm for
+Heterogeneous Catalysts. Natl. Sci. Rev 2015, 2, 140−143.
+(13) Henkelman, G.; Uberuaga, B. P.; Jónsson, H. A Climbing
+Image Nudged Elastic Band Method for Finding Saddle Points and
+Minimum Energy Paths. J. Chem. Phys 2000, 113, 9901−9904.
+(14) Jónsson, H.; Mills, G.; Jacobsen, K. W.Nudged Elastic Band
+Method for Finding Minimum Energy Paths of TransitionsClassical
+and Quantum Dynamics in Condensed Phase SimulationsWorld
+ScientificLerici, Villa Marigola1998385−404
+(15) Peters, B.; Heyden, A.; Bell, A. T.; Chakraborty, A. A Growing
+String Method for Determining Transition States: Comparison to the
+Nudged Elastic Band and String Methods. J. Chem. Phys 2004, 120,
+7877−7886.
+(16) Cerjan, C. J.; Miller, W. H. On Finding Transition States. J.
+Chem. Phys 1981, 75, 2800−2806.
+(17) Banerjee, A.; Adams, N.; Simons, J.; Shepard, R. Search for
+Stationary Points on Surfaces. J. Phys. Chem 1985, 89, 52−57.
+(18) Besalu ́, E.; Bofill, J. M. On the Automatic Restricted-Step
+Rational-Function-Optimization Method. Theor. Chem. Acc 1998,
+100, 265−274.
+(19) Henkelman, G.; Jónsson, H. A Dimer Method for Finding
+Saddle Points on High Dimensional Potential Surfaces Using Only
+First Derivatives. J. Chem. Phys 1999, 111, 7010−7022.
+(20) Barkema, G. T.; Mousseau, N. Event-Based Relaxation of
+Continuous Disordered Systems. Phys. Rev. Lett 1996, 77, 4358−
+4361.
+(21) Malek, R.; Mousseau, N. Dynamics of Lennard-Jones Clusters:
+A Characterization of the Activation-Relaxation Technique. Phys. Rev.
+E 2000, 62, 7723−7728.
+(22) Heyden, A.; Bell, A. T.; Keil, F. J. Efficient Methods for Finding
+Transition States in Chemical Reactions: Comparison of Improved
+Dimer Method and Partitioned Rational Function Optimization
+Method. J. Chem. Phys 2005, 123 (22), 224101.
+(23) A
+́
+sgeirsson, V.; Birgisson, B. O.; Bjornsson, R.; Becker, U.;
+Neese, F.; Riplinger, C.; Jónsson, H. Nudged Elastic Band Method for
+Molecular Reactions Using Energy-Weighted Springs Combined with
+Eigenvector Following. J. Chem. Theory Comput 2021, 17, 4929−
+4945.
+(24) Hermes, E. D.; Sargsyan, K.; Najm, H. N.; Zádor, J. Accelerated
+Saddle Point Refinement through Full Exploitation of Partial Hessian
+Diagonalization. J. Chem. Theory Comput 2019, 15, 6536−6549.
+(25) Jay, A.; Gunde, M.; Salles, N.; Poberz ̌nik, M.; Martin-Samos, L.;
+Richard, N.; de Gironcoli, S.; Mousseau, N.; Hémeryck, A.
+Activation−Relaxation Technique: An efficient way to find minima
+and saddle points of potential energy surfaces. Comput. Mater. Sci
+2022, 209, 111363.
+(26) Munro, L. J.; Wales, D. J. Defect Migration in Crystalline
+Silicon. Phys. Rev. B 1999, 59, 3969−3980.
+(27) Birkholz, A. B.; Schlegel, H. B. Coordinate Reduction for
+Exploring Chemical Reaction Paths. Theor. Chem. Acc 2012, 131 (3),
+1170.
+(28) Miron, R. A.; Fichthorn, K. A. Accelerated Molecular Dynamics
+with the Bond-Boost Method. J. Chem. Phys 2003, 119, 6210−6216.
+(29) Vashisth, A.; Ashraf, C.; Zhang, W.; Bakis, C. E.; van Duin, A.
+C. T. Accelerated ReaxFF Simulations for Describing the Reactive
+Cross-Linking of Polymers. J. Phys. Chem. A 2018, 122, 6633−6642.
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+K
+
+(30) Maeda, S.; Morokuma, K. Communications: A systematic
+method for locating transition structures of A+B→X type reactions. J.
+Chem. Phys 2010, 132, 241102.
+(31) Maeda, S.; Morokuma, K. Finding Reaction Pathways of Type
+A + B →Toward Systematic Prediction of Reaction Mechanisms. J.
+Chem. Theory Comput 2011, 7, 2335−2345.
+(32) Peng, C.; Bernhard Schlegel, H. Combining Synchronous
+Transit and Quasi-Newton Methods to Find Transition States. Isr. J.
+Chem 1993, 33, 449−454.
+(33) Nocedal, J.; Wright, S. J.; Numerical Optimization Springer:
+New York, NY, 1999; pp. 192−221.
+(34) Anglada, J. M.; Bofill, J. M. How Good Is a Broyden-Fletcher-
+Goldfarb-Shanno-like Update Hessian Formula to Locate Transition
+Structures? Specific Reformulation of Broyden-Fletcher-Goldfarb-
+Shanno for Optimizing Saddle Points. J. Comput. Chem 1998, 19,
+349−362.
+(35) Bofill, J. M. Remarks on the Updated Hessian Matrix Methods.
+Int. J. Quantum Chem 2003, 94, 324−332.
+(36) Greenstadt, J. Variations on Variable-Metric Methods. Math.
+Comput 1970, 24, 1−22.
+(37) Nocedal, J.; Wright, S. J.; Numerical Optimization Springer:
+New York, NY, 1999; pp. 64−99.
+(38) Nocedal, J.; Wright, S. J.; Numerical Optimization Springer:
+New York, NY, 1999; pp. 488−525.
+(39) Smidstrup, S.; Pedersen, A.; Stokbro, K.; Jónsson, H. Improved
+Initial Guess for Minimum Energy Path Calculations. J. Chem. Phys
+2014, 140 (21), 214106.
+(40) Fischer, F.; Tropsch, H. U
+̈
+ber Die Synthese Ho ̈herer Glieder
+Der Aliphatischen Reihe Aus Kohlenoxyd. Ber. Dtsch. Chem. Ges. A
+1923, 56, 2428−2443.
+(41) Fischer, F.; Tropsch, H. Die Erdo ̈lsynthese Bei Gewo ̈hnlichem
+Druck Aus Den Vergasungsprodukten Der Kohlen. Brennst. Chem
+1926, 7, 97−116.
+(42) Fischer, F.; Tropsch, H. U
+̈
+ber Die Direkte Synthese von Erdo ̈l-
+Kohlenwasserstoffen Bei Gewo ̈hnlichem Druck. (Erste Mitteilung).
+Ber. Dtsch. Chem. Ges. A 1926, 59, 830−831.
+(43) Hermes, E. D.; Sargsyan, K.; Najm, H. N.; Zádor, J. Geometry
+Optimization Speedup through a Geodesic Approach to Internal
+Coordinates. J. Chem. Phys 2021, 155 (9), 094105.
+(44) Hermes, E. D.; Sargsyan, K.; Najm, H. N.; Zádor, J. Sella, an
+Open-Source Automation-Friendly Molecular Saddle Point Opti-
+mizer. J. Chem. Theory Comput 2022, 18, 6974−6988.
+(45) Kresse, G.; Furthmu ̈ller, J. Efficient Iterative Schemes for Ab
+Initio Total-Energy Calculations Using a Plane-Wave Basis Set. Phys.
+Rev. B 1996, 54, 11169−11186.
+(46) Kresse, G.; Furthmu ̈ller, J. Efficiency of Ab-Initio Total Energy
+Calculations for Metals and Semiconductors Using a Plane-Wave
+Basis Set. Comput. Mater. Sci 1996, 6, 15−50.
+(47) Hjorth Larsen, A.; Jørgen Mortensen, J.; Blomqvist, J.; Castelli,
+I. E.; Christensen, R.; Dułak, M.; Friis, J.; Groves, M. N.; Hammer, B.;
+Hargus, C.; Hermes, E. D.; Jennings, P. C.; Bjerre Jensen, P.;
+Kermode, J.; Kitchin, J. R.; Leonhard Kolsbjerg, E.; Kubal, J.;
+Kaasbjerg, K.; Lysgaard, S.; Bergmann Maronsson, J.; Maxson, T.;
+Olsen, T.; Pastewka, L.; Peterson, A.; Rostgaard, C.; Schiøtz, J.;
+Schu ̈tt, O.; Strange, M.; Thygesen, K. S.; Vegge, T.; Vilhelmsen, L.;
+Walter, M.; Zeng, Z.; Jacobsen, K. W. The Atomic Simulation
+Environment�a Python Library for Working with Atoms. J. Phys.:
+Condens. Matter 2017, 29, 273002.
+Journal of Chemical Theory and Computation pubs.acs.org/JCTC Article
+https://doi.org/10.1021/acs.jctc.5c01015
+J. Chem. Theory Comput. XXXX, XXX, XXX−XXX
+L
+

@@ -59,7 +59,7 @@ class _PRFOSolver:
             except (ZeroDivisionError, np.linalg.LinAlgError, ValueError):
                 return 1e6
         try:
-            alpha_sq_opt = brentq(constraint_residual, 1e-6, 1e6, xtol=tol)
+            alpha_sq_opt = brentq(constraint_residual, 1e-20, 1e6, xtol=tol)
             s_max_tilde, _ = self._solve_rfo_subproblem(eigvals[:1], g_tilde[:1], 'max', alpha_sq_opt)
             s_min_tilde, _ = self._solve_rfo_subproblem(eigvals[1:], g_tilde[1:], 'min', alpha_sq_opt)
             s_tilde = np.concatenate([s_max_tilde, s_min_tilde])

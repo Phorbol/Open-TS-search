@@ -1,9 +1,11 @@
 from registry.registry import default_registry
 from registry.components import default_component_registry, register_defaults as register_component_defaults
 from algo.ccqn.ccqn_optimizer import CCQNOptimizer
+from algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
 
 def register_defaults():
     default_registry.register_algorithm('ccqn', 'v1.10', CCQNOptimizer)
+    default_registry.register_algorithm('ccqn-gpu', 'v1.0', CCQNGPUOptimizer)
     register_component_defaults()
 
 def create_optimizer(algorithm, version, atoms, **kwargs):
