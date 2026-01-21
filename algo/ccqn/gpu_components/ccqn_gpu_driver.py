@@ -27,9 +27,17 @@ class CCQNGPUDriver:
                  gpu_trust_manager=None,
                  gpu_mode_selector=None,
                  hessian=False,
-                 atoms=None): # atoms is optional, only needed if using internal Hessian manager
+                 atoms=None,
+                 # Uphill Solver Hyperparameters (Reverted momentum args)
+                 uphill_max_iter=200,
+                 uphill_use_slsqp=False,
+                 uphill_use_alm=False,
+                 uphill_use_adam=False,
+                 uphill_lr=0.01,
+                 debug_mode=False): 
         
         self.device = device or torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.debug_mode = debug_mode
         
         # Parameters
         self.cos_phi = cos_phi
@@ -37,7 +45,13 @@ class CCQNGPUDriver:
         
         # Components
         self._hessian_mgr = gpu_hessian_manager or GPUHessianManager(atoms, hessian, self.device)
-        self._uphill_solver = gpu_uphill_solver or GPUUphillSolver()
+        self._uphill_solver = gpu_uphill_solver or GPUUphillSolver(
+            max_iter=uphill_max_iter,
+            use_slsqp=uphill_use_slsqp,
+            use_alm=uphill_use_alm,
+            use_adam=uphill_use_adam,
+            lr=uphill_lr
+        )
         self._prfo_solver = gpu_prfo_solver or GPUPRFOSolver(self.device)
         self._trust_mgr = gpu_trust_manager or GPUTrustRegionManager(trust_radius_saddle_initial, 
                                                                     trust_radius_saddle_min, 
@@ -56,6 +70,15 @@ class CCQNGPUDriver:
         self.rho = 0.0
         self.eigvals = None
         self.eigvecs = None
+        
+        # Trajectory Logging
+        self.log_data = {
+            'steps': [],       # Actual steps taken
+            'e_vectors': [],   # e_vectors used
+            'gradients': [],   # Gradients
+            'modes': [],       # Optimization modes
+            'energies': []     # Energies
+        }
 
     def initialize(self, natoms=None, B_init=None):
         """
@@ -158,6 +181,19 @@ class CCQNGPUDriver:
         if self.mode == 'uphill':
             # e_vec is already prepared above
             s_k = self._uphill_solver.solve(g_k, self.B, e_vec, self.trust_radius_uphill, self.cos_phi)
+            
+            # Detailed Logging for Uphill
+            if logfile and torch.norm(s_k) > 1e-9 and torch.norm(e_vec) > 1e-9:
+                s_norm = s_k / torch.norm(s_k)
+                e_norm = e_vec / torch.norm(e_vec)
+                cos_sim = torch.dot(s_norm, e_norm).item()
+                
+                g_norm = g_k / torch.norm(g_k)
+                cos_sim_g = torch.dot(s_norm, g_norm).item()
+                
+                logfile.write(f"  Uphill Direction Analysis:\n")
+                logfile.write(f"    Cos(step, e_vec) = {cos_sim:.4f} (Target > {self.cos_phi:.4f})\n")
+                logfile.write(f"    Cos(step, grad)  = {cos_sim_g:.4f}\n")
         
         else: # PRFO
             if self.nsteps > 0:
@@ -181,6 +217,10 @@ class CCQNGPUDriver:
         self.g_k_minus_1 = g_k.clone()
         self.energy_k_minus_1 = e_k
         self.nsteps += 1
+        
+        # 6. Record Trajectory Data (Only in debug mode)
+        if self.debug_mode:
+            self._record_step_data(s_k, e_vec, g_k, e_k)
         
         return s_k
 

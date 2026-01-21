@@ -6,6 +6,7 @@ def jit_solve_pgd(s: torch.Tensor, g: torch.Tensor, B: torch.Tensor, e_vec: torc
     """
     Uphill PGD 求解器的 JIT 编译版。
     完全在 GPU 上运行，没有 Python 循环开销。
+    (Reverted to original version: fixed lr=0.01, no momentum)
     """
     lr = 0.01
     

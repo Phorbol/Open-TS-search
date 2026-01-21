@@ -166,6 +166,10 @@ class GPUPRFOSolver:
         aug[:dim, dim] = g/a 
         aug[dim, :dim] = g/a 
         
+        # --- STABILITY FIX: Force exact symmetry ---
+        # eigh can be unstable if tiny float errors break symmetry
+        aug = 0.5 * (aug + aug.T)
+        
         vals, vecs = torch.linalg.eigh(aug) 
         idx = -1 if mode == 'max' else 0 
         scale = vecs[-1, idx] 

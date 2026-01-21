@@ -34,36 +34,48 @@ def write_animated_mode_xyz(vib_object, atoms, index, file_prefix, is_imag):
     write(output_filename, images_list)
     print(f"     > Animation for Mode #{index} output to {output_filename}")
 
-def get_vib_mode(ts_atoms, constraint=None, name='vib_check', cutoff_cm=50.0, 
+def get_vib_mode(ts_atoms, calculator=None, constraint=None, name='vib_check', cutoff_cm=50.0, 
                  output_all_imag_modes=False, output_all_real_modes=False):
     """
     [XYZ Output Version] Check first-order saddle point and extract imaginary modes and animations.
     
     Args:
         ts_atoms (ase.Atoms): Structure.
-        constraint (ase.constraints.Constraint): Constraint.
+        calculator (ase.calculators.calculator.Calculator): Optional calculator to use. 
+                                                            If None, uses ts_atoms.calc.
+        constraint (ase.constraints.Constraint): Constraint. If None, uses ts_atoms.constraints.
         name (str): Directory/prefix for output.
         cutoff_cm (float): Cutoff for imaginary frequency (cm^-1).
         output_all_imag_modes (bool): If True, output animation for all imaginary modes > cutoff.
         output_all_real_modes (bool): If True, output animation for all real modes.
         
     Returns:
-        numpy.ndarray or None: Eigenvector of the unique significant imaginary frequency if found.
+        numpy.ndarray or None: Eigenvector of the unique (or most significant) imaginary frequency if found.
     """
     # 1. Cleanup
     if os.path.exists(name): shutil.rmtree(name)
-    # vib is the default cache dir for some ASE versions/configs, clean it if safe?
-    # User script had: if os.path.exists("vib"): shutil.rmtree("vib")
-    # We will skip cleaning "vib" globally to be safer, unless name='vib'.
     
     print(f"\n>>> [Vib-Check] Starting Hessian calculation for {name}...")
     
     atoms_vib = ts_atoms.copy()
-    atoms_vib.calc = ts_atoms.calc
     
+    # Calculator handling
+    if calculator is not None:
+        atoms_vib.calc = calculator
+    elif ts_atoms.calc is not None:
+        atoms_vib.calc = ts_atoms.calc
+    else:
+        # Warning: No calculator available, Vib will fail unless user knows what they are doing
+        print(">>> [Warning] No calculator attached to atoms or provided explicitly.")
+
+    # Constraint handling: 
+    # If explicit constraint provided, override.
+    # If explicit is None, copy() already preserves the original constraints.
     if constraint is not None:
         atoms_vib.set_constraint(constraint)
-        print(f"     Constraint {constraint} applied.")
+        print(f"     Constraint explicitly applied: {constraint}")
+    elif atoms_vib.constraints:
+        print(f"     Using existing constraints from atoms: {atoms_vib.constraints}")
 
     # 2. Run Vibrations
     vib = Vibrations(atoms_vib, name=name)
@@ -104,23 +116,27 @@ def get_vib_mode(ts_atoms, constraint=None, name='vib_check', cutoff_cm=50.0,
     if num_imag == 0:
         print(">>> [Result] No significant imaginary frequencies found. (MINIMUM)")
     
-    elif num_imag == 1:
-        idx, val, vec = imag_candidates[0]
-        print(">>> [Result] Confirmed First-Order Saddle Point.")
-        print(f"     Reaction Coordinate: Mode #{idx} ({val:.1f}i cm^-1)")
+    elif num_imag >= 1:
+        # Sort by frequency magnitude (descending) -> most imaginary first
+        imag_candidates.sort(key=lambda x: x[1], reverse=True)
         
+        best_idx, best_val, best_vec = imag_candidates[0]
+        
+        if num_imag == 1:
+            print(">>> [Result] Confirmed First-Order Saddle Point.")
+        else:
+            print(f">>> [Result] Higher-Order Saddle Point found ({num_imag} significant modes).")
+            for idx, val, _ in imag_candidates:
+                print(f"     Mode {idx}: {val:.1f}i")
+            print(f"     Selecting the most significant mode (Mode #{best_idx}) for return.")
+
+        print(f"     Reaction Coordinate: Mode #{best_idx} ({best_val:.1f}i cm^-1)")
+        
+        # If output_all_imag_modes was False, at least output the best one now
         if not output_all_imag_modes:
-             write_animated_mode_xyz(vib, atoms_vib, idx, name, is_imag=True)
+             write_animated_mode_xyz(vib, atoms_vib, best_idx, name, is_imag=True)
         
-        result_vec = vec
-        
-    elif num_imag > 1:
-        print(f">>> [Result] Higher-Order Saddle Point found ({num_imag} modes).")
-        for idx, val, _ in imag_candidates:
-            print(f"     Mode {idx}: {val:.1f}i")
-        
-        if not output_all_imag_modes:
-            print("     > No imaginary mode animations output (set output_all_imag_modes=True to output all).")
+        result_vec = best_vec
 
     # 5. Real modes
     if output_all_real_modes:
