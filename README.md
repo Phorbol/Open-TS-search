@@ -7,6 +7,23 @@
   - CCQN-specific optimizer, components, phases, and contexts
 - Dependencies are imported lazily inside functions where possible to minimize global load.
 
+## Installation
+
+### Basic Installation
+```bash
+pip install .
+```
+
+### Full Installation (with IRC and ML support)
+```bash
+pip install .[irc,ml]
+```
+
+### Development Installation
+```bash
+pip install -e .[dev,irc,ml]
+```
+
 ## Directory Structure
 - shared/
   - interp.py: robust_interpolate, Vectorized_ASE_IDPPSolver
@@ -50,25 +67,7 @@
   - PRFOPhase: rho quality, trust radius update, PRFO step
 - Components are single-responsibility files for easy maintenance and replacement.
 
-## Quick Start
-```python
-from registry.factory import create_ccqn
-from ase.build import molecule
-from ase.calculators.emt import EMT
 
-mol = molecule('H2')
-mol.calc = EMT()
-opt = create_ccqn(
-    mol,
-    e_vector_method='interp',
-    product_atoms=mol.copy(),
-    idpp_images=5,
-    use_idpp=True,
-    hessian=False
-)
-for _ in range(10):
-    opt.step()
-```
 
 ## GPU Acceleration with MACE
 For heavy workloads, you can use the GPU-accelerated optimizer with ML potentials like MACE:
