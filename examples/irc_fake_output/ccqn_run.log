@@ -79,3 +79,1164 @@ Driver Step  12: UPHILL | Input State: E=-2436.0415, Fmax=4.4494, MinEig=5.9164e
     Cos(step, e_vec) = 0.5000 (Target > 0.5000)
     Cos(step, grad)  = 0.1930
 CCQNGPUOptimizer:   13 01:28:14    -2435.894531        4.720937
+Driver Step  13: UPHILL | Input State: E=-2435.8945, Fmax=4.7209, MinEig=5.9591e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4420, 0.1931, 0.4034]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1935
+CCQNGPUOptimizer:   14 01:28:14    -2435.738770        4.982683
+Driver Step  14: UPHILL | Input State: E=-2435.7388, Fmax=4.9827, MinEig=5.9350e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4436, 0.2074, 0.3936]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1940
+CCQNGPUOptimizer:   15 01:28:15    -2435.574463        5.242248
+Driver Step  15: UPHILL | Input State: E=-2435.5745, Fmax=5.2422, MinEig=5.7549e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4453, 0.2245, 0.3796]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1944
+CCQNGPUOptimizer:   16 01:28:16    -2435.402344        5.495352
+Driver Step  16: UPHILL | Input State: E=-2435.4023, Fmax=5.4954, MinEig=5.5987e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4468, 0.2366, 0.3684]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1946
+CCQNGPUOptimizer:   17 01:28:16    -2435.222412        5.746595
+Driver Step  17: UPHILL | Input State: E=-2435.2224, Fmax=5.7466, MinEig=5.5354e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4481, 0.2537, 0.3547]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1950
+CCQNGPUOptimizer:   18 01:28:17    -2435.034912        5.987589
+Driver Step  18: UPHILL | Input State: E=-2435.0349, Fmax=5.9876, MinEig=5.4792e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4496, 0.2684, 0.3423]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1953
+CCQNGPUOptimizer:   19 01:28:18    -2434.840088        6.220468
+Driver Step  19: UPHILL | Input State: E=-2434.8401, Fmax=6.2205, MinEig=5.3475e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4515, 0.2852, 0.3269]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1957
+CCQNGPUOptimizer:   20 01:28:18    -2434.637939        6.443733
+Driver Step  20: UPHILL | Input State: E=-2434.6379, Fmax=6.4437, MinEig=5.3486e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4534, 0.3066, 0.3065]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1962
+CCQNGPUOptimizer:   21 01:28:19    -2434.428711        6.660962
+Driver Step  21: UPHILL | Input State: E=-2434.4287, Fmax=6.6610, MinEig=5.7166e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4547, 0.3353, 0.2771]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1973
+CCQNGPUOptimizer:   22 01:28:20    -2434.211670        6.870978
+Driver Step  22: UPHILL | Input State: E=-2434.2117, Fmax=6.8710, MinEig=6.3609e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4556, 0.3658, 0.2383]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1989
+CCQNGPUOptimizer:   23 01:28:20    -2433.986816        7.077999
+Driver Step  23: UPHILL | Input State: E=-2433.9868, Fmax=7.0780, MinEig=7.2938e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4562, 0.3929, 0.1926]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2014
+CCQNGPUOptimizer:   24 01:28:21    -2433.752686        7.286191
+Driver Step  24: UPHILL | Input State: E=-2433.7527, Fmax=7.2862, MinEig=8.6105e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4567, 0.4130, 0.1455]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2048
+CCQNGPUOptimizer:   25 01:28:22    -2433.507812        7.499072
+Driver Step  25: UPHILL | Input State: E=-2433.5078, Fmax=7.4991, MinEig=1.0090e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4574, 0.4238, 0.1053]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2092
+CCQNGPUOptimizer:   26 01:28:23    -2433.251221        7.717056
+Driver Step  26: UPHILL | Input State: E=-2433.2512, Fmax=7.7171, MinEig=1.1558e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4586, 0.4278, 0.0731]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2144
+CCQNGPUOptimizer:   27 01:28:23    -2432.981445        7.937926
+Driver Step  27: UPHILL | Input State: E=-2432.9814, Fmax=7.9379, MinEig=1.3040e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4604, 0.4273, 0.0490]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2205
+CCQNGPUOptimizer:   28 01:28:24    -2432.697021        8.157341
+Driver Step  28: UPHILL | Input State: E=-2432.6970, Fmax=8.1573, MinEig=1.4330e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4634, 0.4233, 0.0310]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2273
+CCQNGPUOptimizer:   29 01:28:25    -2432.397461        8.373228
+Driver Step  29: UPHILL | Input State: E=-2432.3975, Fmax=8.3732, MinEig=1.5101e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4676, 0.4164, 0.0189]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2343
+CCQNGPUOptimizer:   30 01:28:25    -2432.082520        8.582712
+Driver Step  30: UPHILL | Input State: E=-2432.0825, Fmax=8.5827, MinEig=1.5324e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4734, 0.4066, 0.0128]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2413
+CCQNGPUOptimizer:   31 01:28:26    -2431.752686        8.777041
+Driver Step  31: UPHILL | Input State: E=-2431.7527, Fmax=8.7770, MinEig=1.5022e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4812, 0.3938, 0.0111]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2480
+CCQNGPUOptimizer:   32 01:28:27    -2431.408691        8.944449
+Driver Step  32: UPHILL | Input State: E=-2431.4087, Fmax=8.9444, MinEig=1.3827e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4912, 0.3776, 0.0119]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2542
+CCQNGPUOptimizer:   33 01:28:27    -2431.052979        9.073876
+Driver Step  33: UPHILL | Input State: E=-2431.0530, Fmax=9.0739, MinEig=1.1157e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5023, 0.3586, 0.0136]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2592
+CCQNGPUOptimizer:   34 01:28:28    -2430.689209        9.151987
+Driver Step  34: UPHILL | Input State: E=-2430.6892, Fmax=9.1520, MinEig=6.5440e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5130, 0.3386, 0.0105]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2622
+CCQNGPUOptimizer:   35 01:28:29    -2430.322998        9.162203
+ -> Switching to PRFO. Reason: Min eigenvalue (-2.4419e-02) < -1e-6
+Driver Step  35: PRFO | Input State: E=-2430.3230, Fmax=9.1622, MinEig=-2.4419e-02, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5196, 0.3171, 0.0132]
+  PRFO Quality: rho=1.0006
+CCQNGPUOptimizer:   36 01:28:29    -2430.544678        7.908542
+Driver Step  36: PRFO | Input State: E=-2430.5447, Fmax=7.9085, MinEig=-2.4436e-02, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5179, 0.4235, 0.2533]
+  PRFO Quality: rho=0.9983
+CCQNGPUOptimizer:   37 01:28:30    -2430.798828        7.790524
+Driver Step  37: PRFO | Input State: E=-2430.7988, Fmax=7.7905, MinEig=-2.4604e-02, Trust=5.3619e-02
+  e_vector Overlaps (v0, v1, v2): [0.5252, 0.3936, 0.3066]
+  PRFO Quality: rho=0.9983
+CCQNGPUOptimizer:   38 01:28:30    -2431.025391        7.678241
+Driver Step  38: PRFO | Input State: E=-2431.0254, Fmax=7.6782, MinEig=-2.4620e-02, Trust=5.7500e-02
+  e_vector Overlaps (v0, v1, v2): [0.5278, 0.3893, 0.3526]
+  PRFO Quality: rho=1.0000
+CCQNGPUOptimizer:   39 01:28:31    -2431.230469        7.566626
+Driver Step  39: PRFO | Input State: E=-2431.2305, Fmax=7.5666, MinEig=-2.4640e-02, Trust=6.1662e-02
+  e_vector Overlaps (v0, v1, v2): [0.5315, 0.3915, 0.4041]
+  PRFO Quality: rho=1.0001
+CCQNGPUOptimizer:   40 01:28:32    -2431.416748        7.449219
+Driver Step  40: PRFO | Input State: E=-2431.4167, Fmax=7.4492, MinEig=-2.4660e-02, Trust=6.6125e-02
+  e_vector Overlaps (v0, v1, v2): [0.5360, 0.4077, 0.4358]
+  PRFO Quality: rho=0.9991
+CCQNGPUOptimizer:   41 01:28:32    -2431.587402        7.316248
+Driver Step  41: PRFO | Input State: E=-2431.5874, Fmax=7.3162, MinEig=-2.4666e-02, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.5397, 0.4339, 0.4367]
+  PRFO Quality: rho=1.0011
+CCQNGPUOptimizer:   42 01:28:33    -2431.744385        7.154773
+Driver Step  42: PRFO | Input State: E=-2431.7444, Fmax=7.1548, MinEig=-2.4666e-02, Trust=7.6044e-02
+  e_vector Overlaps (v0, v1, v2): [0.5394, 0.4579, 0.4193]
+  PRFO Quality: rho=1.0002
+CCQNGPUOptimizer:   43 01:28:33    -2431.891113        6.948423
+Driver Step  43: PRFO | Input State: E=-2431.8911, Fmax=6.9484, MinEig=-2.4672e-02, Trust=8.1548e-02
+  e_vector Overlaps (v0, v1, v2): [0.5325, 0.4687, 0.4075]
+  PRFO Quality: rho=0.9992
+CCQNGPUOptimizer:   44 01:28:34    -2432.032715        6.675344
+Driver Step  44: PRFO | Input State: E=-2432.0327, Fmax=6.6753, MinEig=-2.4540e-02, Trust=8.7450e-02
+  e_vector Overlaps (v0, v1, v2): [0.5179, 0.4612, 0.4174]
+  PRFO Quality: rho=1.0027
+CCQNGPUOptimizer:   45 01:28:34    -2432.171875        6.307012
+Driver Step  45: PRFO | Input State: E=-2432.1719, Fmax=6.3070, MinEig=-2.3988e-02, Trust=9.3780e-02
+  e_vector Overlaps (v0, v1, v2): [0.4975, 0.4326, 0.4506]
+  PRFO Quality: rho=1.0012
+CCQNGPUOptimizer:   46 01:28:35    -2432.307617        5.813279
+Driver Step  46: PRFO | Input State: E=-2432.3076, Fmax=5.8133, MinEig=-2.3047e-02, Trust=1.0057e-01
+  e_vector Overlaps (v0, v1, v2): [0.4754, 0.3887, 0.4914]
+  PRFO Quality: rho=1.0046
+CCQNGPUOptimizer:   47 01:28:35    -2432.429688        5.181096
+Driver Step  47: PRFO | Input State: E=-2432.4297, Fmax=5.1811, MinEig=-2.2336e-02, Trust=1.0785e-01
+  e_vector Overlaps (v0, v1, v2): [0.4576, 0.3502, 0.5162]
+  PRFO Quality: rho=1.0045
+CCQNGPUOptimizer:   48 01:28:36    -2432.521240        4.445775
+Driver Step  48: PRFO | Input State: E=-2432.5212, Fmax=4.4458, MinEig=-2.2233e-02, Trust=1.1565e-01
+  e_vector Overlaps (v0, v1, v2): [0.4505, 0.3375, 0.5108]
+  PRFO Quality: rho=1.0081
+CCQNGPUOptimizer:   49 01:28:36    -2432.562744        3.703911
+Driver Step  49: PRFO | Input State: E=-2432.5627, Fmax=3.7039, MinEig=-2.2211e-02, Trust=1.2402e-01
+  e_vector Overlaps (v0, v1, v2): [0.4615, 0.3688, 0.4534]
+  PRFO Quality: rho=1.0099
+CCQNGPUOptimizer:   50 01:28:36    -2432.536133        3.069199
+Driver Step  50: PRFO | Input State: E=-2432.5361, Fmax=3.0692, MinEig=-2.4688e-02, Trust=1.3300e-01
+  e_vector Overlaps (v0, v1, v2): [0.5025, 0.4253, 0.3061]
+  PRFO Quality: rho=0.9919
+CCQNGPUOptimizer:   51 01:28:37    -2432.413574        2.646590
+Driver Step  51: PRFO | Input State: E=-2432.4136, Fmax=2.6466, MinEig=-7.0875e-02, Trust=1.4263e-01
+  e_vector Overlaps (v0, v1, v2): [0.6191, 0.2951, 0.1751]
+  PRFO Quality: rho=0.9974
+CCQNGPUOptimizer:   52 01:28:37    -2432.047607        2.906346
+ -> Switching to Uphill. Reason: Min eigenvalue (6.1364e-01) > 1e-2
+Driver Step  52: UPHILL | Input State: E=-2432.0476, Fmax=2.9063, MinEig=6.1364e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0074, 0.5833, 0.3402]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.0306
+CCQNGPUOptimizer:   53 01:28:38    -2431.936279        4.523964
+Driver Step  53: UPHILL | Input State: E=-2431.9363, Fmax=4.5240, MinEig=1.7633e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.1074, 0.5027, 0.3939]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.2138
+CCQNGPUOptimizer:   54 01:28:39    -2431.974121        4.707294
+Driver Step  54: UPHILL | Input State: E=-2431.9741, Fmax=4.7073, MinEig=1.9285e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0824, 0.5606, 0.2241]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.0602
+CCQNGPUOptimizer:   55 01:28:39    -2431.861084        4.981971
+Driver Step  55: UPHILL | Input State: E=-2431.8611, Fmax=4.9820, MinEig=1.8679e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.1011, 0.5897, 0.1672]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2137
+CCQNGPUOptimizer:   56 01:28:40    -2431.650635        5.774510
+Driver Step  56: UPHILL | Input State: E=-2431.6506, Fmax=5.7745, MinEig=1.6641e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.1255, 0.3890, 0.3959]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2620
+CCQNGPUOptimizer:   57 01:28:41    -2431.373535        6.654292
+Driver Step  57: UPHILL | Input State: E=-2431.3735, Fmax=6.6543, MinEig=1.7709e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0988, 0.1409, 0.4240]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3101
+CCQNGPUOptimizer:   58 01:28:41    -2431.003418        8.188401
+Driver Step  58: UPHILL | Input State: E=-2431.0034, Fmax=8.1884, MinEig=2.1092e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0554, 0.0466, 0.2020]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3567
+CCQNGPUOptimizer:   59 01:28:42    -2430.518799        9.847006
+Driver Step  59: UPHILL | Input State: E=-2430.5188, Fmax=9.8470, MinEig=2.3881e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0178, 0.0762, 0.1669]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3877
+CCQNGPUOptimizer:   60 01:28:43    -2429.909424       11.673345
+Driver Step  60: UPHILL | Input State: E=-2429.9094, Fmax=11.6733, MinEig=2.5434e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0084, 0.0477, 0.1377]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.4024
+CCQNGPUOptimizer:   61 01:28:44    -2429.171387       13.328012
+Driver Step  61: UPHILL | Input State: E=-2429.1714, Fmax=13.3280, MinEig=2.5952e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0189, 0.1224, 0.3541]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.4127
+CCQNGPUOptimizer:   62 01:28:44    -2428.286133       16.434988
+Driver Step  62: UPHILL | Input State: E=-2428.2861, Fmax=16.4350, MinEig=2.6094e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0208, 0.1456, 0.4296]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3936
+CCQNGPUOptimizer:   63 01:28:45    -2427.237305       19.265001
+Driver Step  63: UPHILL | Input State: E=-2427.2373, Fmax=19.2650, MinEig=2.6175e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0231, 0.0602, 0.4167]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3815
+CCQNGPUOptimizer:   64 01:28:46    -2426.091064       21.611565
+Driver Step  64: UPHILL | Input State: E=-2426.0911, Fmax=21.6116, MinEig=2.6149e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0176, 0.0855, 0.3896]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3901
+CCQNGPUOptimizer:   65 01:28:46    -2424.762207       25.435465
+Driver Step  65: UPHILL | Input State: E=-2424.7622, Fmax=25.4355, MinEig=2.6192e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0192, 0.1344, 0.3529]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3796
+CCQNGPUOptimizer:   66 01:28:47    -2423.200195       30.239511
+Driver Step  66: UPHILL | Input State: E=-2423.2002, Fmax=30.2395, MinEig=2.6265e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0088, 0.0445, 0.3364]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.3848
+CCQNGPUOptimizer:   67 01:28:48    -2421.278809       35.930843
+Driver Step  67: UPHILL | Input State: E=-2421.2788, Fmax=35.9308, MinEig=2.6351e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0007, 0.0068, 0.2448]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.4026
+CCQNGPUOptimizer:   68 01:28:48    -2418.857666       42.894104
+Driver Step  68: UPHILL | Input State: E=-2418.8577, Fmax=42.8941, MinEig=2.6379e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0034, 0.0110, 0.1075]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.4285
+CCQNGPUOptimizer:   69 01:28:49    -2415.799072       50.409122
+Driver Step  69: UPHILL | Input State: E=-2415.7991, Fmax=50.4091, MinEig=2.6390e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0054, 0.0136, 0.0913]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.4541
+CCQNGPUOptimizer:   70 01:28:50    -2412.062744       60.256268
+Driver Step  70: UPHILL | Input State: E=-2412.0627, Fmax=60.2563, MinEig=2.6053e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0176, 0.0048, 0.1251]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.4621
+CCQNGPUOptimizer:   71 01:28:51    -2407.661133       72.768150
+Driver Step  71: UPHILL | Input State: E=-2407.6611, Fmax=72.7682, MinEig=2.7890e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0298, 0.0807, 0.2245]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.5559
+CCQNGPUOptimizer:   72 01:28:51    -2398.586914      128.572937
+Driver Step  72: UPHILL | Input State: E=-2398.5869, Fmax=128.5729, MinEig=4.2244e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0029, 0.0243, 0.0605]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.4114
+CCQNGPUOptimizer:   73 01:28:52    -2403.877930      126.044815
+Driver Step  73: UPHILL | Input State: E=-2403.8779, Fmax=126.0448, MinEig=4.2206e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0050, 0.0084, 0.0089]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.2475
+CCQNGPUOptimizer:   74 01:28:53    -2407.187988      122.811394
+Driver Step  74: UPHILL | Input State: E=-2407.1880, Fmax=122.8114, MinEig=4.1634e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0113, 0.0161, 0.0521]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.1556
+CCQNGPUOptimizer:   75 01:28:53    -2409.397705      118.817810
+Driver Step  75: UPHILL | Input State: E=-2409.3977, Fmax=118.8178, MinEig=3.7448e-01, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.0365, 0.0758, 0.2627]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.1095
+CCQNGPUOptimizer:   76 01:28:54    -2411.053955      113.800140
+ -> Switching to PRFO. Reason: Min eigenvalue (-2.3211e+00) < -1e-6
+Driver Step  76: PRFO | Input State: E=-2411.0540, Fmax=113.8001, MinEig=-2.3211e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4016, 0.1146, 0.0350]
+  PRFO Quality: rho=0.9875
+CCQNGPUOptimizer:   77 01:28:55    -2415.017334       94.153961
+Driver Step  77: PRFO | Input State: E=-2415.0173, Fmax=94.1540, MinEig=-4.2702e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5206, 0.0872, 0.0359]
+  PRFO Quality: rho=0.9995
+CCQNGPUOptimizer:   78 01:28:55    -2418.928223       73.389893
+Driver Step  78: PRFO | Input State: E=-2418.9282, Fmax=73.3899, MinEig=-4.4287e+00, Trust=5.3619e-02
+  e_vector Overlaps (v0, v1, v2): [0.4819, 0.0778, 0.0330]
+  PRFO Quality: rho=0.9980
+CCQNGPUOptimizer:   79 01:28:56    -2421.600098       57.256794
+Driver Step  79: PRFO | Input State: E=-2421.6001, Fmax=57.2568, MinEig=-4.6807e+00, Trust=5.7500e-02
+  e_vector Overlaps (v0, v1, v2): [0.4089, 0.0630, 0.0265]
+  PRFO Quality: rho=0.9990
+CCQNGPUOptimizer:   80 01:28:56    -2423.032227       45.247822
+Driver Step  80: PRFO | Input State: E=-2423.0322, Fmax=45.2478, MinEig=-3.9490e+00, Trust=6.1662e-02
+  e_vector Overlaps (v0, v1, v2): [0.2778, 0.0502, 0.0172]
+  PRFO Quality: rho=1.0056
+CCQNGPUOptimizer:   81 01:28:57    -2423.055664       37.450512
+ -> Switching to Uphill. Reason: Min eigenvalue (3.7330e-02) > 1e-2
+Driver Step  81: UPHILL | Input State: E=-2423.0557, Fmax=37.4505, MinEig=3.7330e-02, Trust=6.6125e-02
+  e_vector Overlaps (v0, v1, v2): [0.5164, 0.7464, 0.1246]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.7211
+CCQNGPUOptimizer:   82 01:28:57    -2418.238037       63.180878
+ -> Switching to PRFO. Reason: Min eigenvalue (-1.1028e+01) < -1e-6
+Driver Step  82: PRFO | Input State: E=-2418.2380, Fmax=63.1809, MinEig=-1.1028e+01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.3660, 0.0410, 0.0115]
+  PRFO Quality: rho=0.9873
+CCQNGPUOptimizer:   83 01:28:58    -2418.750732       53.386337
+ -> Switching to Uphill. Reason: Min eigenvalue (3.5280e-01) > 1e-2
+Driver Step  83: UPHILL | Input State: E=-2418.7507, Fmax=53.3863, MinEig=3.5280e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.1206, 0.2290, 0.8346]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.5229
+CCQNGPUOptimizer:   84 01:28:59    -2414.460938       77.641113
+Driver Step  84: UPHILL | Input State: E=-2414.4609, Fmax=77.6411, MinEig=4.0982e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.0374, 0.0720, 0.2881]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.3803
+CCQNGPUOptimizer:   85 01:28:59    -2417.400879       75.518425
+Driver Step  85: UPHILL | Input State: E=-2417.4009, Fmax=75.5184, MinEig=4.6617e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.0144, 0.0438, 0.2138]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.2189
+CCQNGPUOptimizer:   86 01:29:00    -2419.164062       72.880829
+Driver Step  86: UPHILL | Input State: E=-2419.1641, Fmax=72.8808, MinEig=4.5524e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.0298, 0.1909, 0.2370]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.1329
+CCQNGPUOptimizer:   87 01:29:01    -2420.284668       69.592712
+Driver Step  87: UPHILL | Input State: E=-2420.2847, Fmax=69.5927, MinEig=2.2017e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.1999, 0.3350, 0.0283]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.0885
+CCQNGPUOptimizer:   88 01:29:01    -2421.073242       65.645805
+ -> Switching to PRFO. Reason: Min eigenvalue (-3.1154e+00) < -1e-6
+Driver Step  88: PRFO | Input State: E=-2421.0732, Fmax=65.6458, MinEig=-3.1154e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4507, 0.0483, 0.0065]
+  PRFO Quality: rho=0.9872
+CCQNGPUOptimizer:   89 01:29:02    -2423.390869       54.190582
+Driver Step  89: PRFO | Input State: E=-2423.3909, Fmax=54.1906, MinEig=-5.6009e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5312, 0.0254, 0.0070]
+  PRFO Quality: rho=0.9995
+CCQNGPUOptimizer:   90 01:29:03    -2425.928467       41.524807
+Driver Step  90: PRFO | Input State: E=-2425.9285, Fmax=41.5248, MinEig=-5.7169e+00, Trust=5.3619e-02
+  e_vector Overlaps (v0, v1, v2): [0.5027, 0.0170, 0.0042]
+  PRFO Quality: rho=0.9964
+CCQNGPUOptimizer:   91 01:29:03    -2427.804443       32.074677
+Driver Step  91: PRFO | Input State: E=-2427.8044, Fmax=32.0747, MinEig=-5.7922e+00, Trust=5.7500e-02
+  e_vector Overlaps (v0, v1, v2): [0.4670, 0.0135, 0.0061]
+  PRFO Quality: rho=0.9981
+CCQNGPUOptimizer:   92 01:29:04    -2429.071777       24.757473
+Driver Step  92: PRFO | Input State: E=-2429.0718, Fmax=24.7575, MinEig=-5.8051e+00, Trust=6.1662e-02
+  e_vector Overlaps (v0, v1, v2): [0.3618, 0.0081, 0.0048]
+  PRFO Quality: rho=1.0013
+CCQNGPUOptimizer:   93 01:29:04    -2429.621094       19.620504
+Driver Step  93: PRFO | Input State: E=-2429.6211, Fmax=19.6205, MinEig=-3.9476e+00, Trust=6.6125e-02
+  e_vector Overlaps (v0, v1, v2): [0.1607, 0.0030, 0.0024]
+  PRFO Quality: rho=1.0164
+CCQNGPUOptimizer:   94 01:29:05    -2429.265869       17.047148
+ -> Switching to Uphill. Reason: Min eigenvalue (5.0958e-01) > 1e-2
+Driver Step  94: UPHILL | Input State: E=-2429.2659, Fmax=17.0471, MinEig=5.0958e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.0616, 0.8664, 0.0272]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1203
+CCQNGPUOptimizer:   95 01:29:05    -2428.216553       22.199835
+Driver Step  95: UPHILL | Input State: E=-2428.2166, Fmax=22.1998, MinEig=3.7834e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.4891, 0.5505, 0.0631]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.2030
+CCQNGPUOptimizer:   96 01:29:06    -2427.038574       24.087751
+Driver Step  96: UPHILL | Input State: E=-2427.0386, Fmax=24.0878, MinEig=5.2202e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.0096, 0.0152, 0.2963]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.5591
+CCQNGPUOptimizer:   97 01:29:07    -2423.541016       46.814796
+Driver Step  97: UPHILL | Input State: E=-2423.5410, Fmax=46.8148, MinEig=5.2378e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.0017, 0.0036, 0.0969]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.3854
+CCQNGPUOptimizer:   98 01:29:08    -2425.353760       44.387493
+Driver Step  98: UPHILL | Input State: E=-2425.3538, Fmax=44.3875, MinEig=5.2379e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.0038, 0.0091, 0.0684]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.2195
+CCQNGPUOptimizer:   99 01:29:08    -2426.371582       41.703850
+Driver Step  99: UPHILL | Input State: E=-2426.3716, Fmax=41.7038, MinEig=5.2017e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.0134, 0.0289, 0.1306]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.1247
+CCQNGPUOptimizer:  100 01:29:09    -2426.948242       38.749447
+Driver Step 100: UPHILL | Input State: E=-2426.9482, Fmax=38.7494, MinEig=5.0100e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.0383, 0.1195, 0.2547]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.0734
+CCQNGPUOptimizer:  101 01:29:10    -2427.296631       35.641865
+Driver Step 101: UPHILL | Input State: E=-2427.2966, Fmax=35.6419, MinEig=3.4109e-01, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.1864, 0.4057, 0.0806]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.0493
+CCQNGPUOptimizer:  102 01:29:10    -2427.549805       32.647636
+ -> Switching to PRFO. Reason: Min eigenvalue (-4.8222e+00) < -1e-6
+Driver Step 102: PRFO | Input State: E=-2427.5498, Fmax=32.6476, MinEig=-4.8222e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5354, 0.0122, 0.0257]
+  PRFO Quality: rho=0.9857
+CCQNGPUOptimizer:  103 01:29:11    -2428.692871       27.061026
+Driver Step 103: PRFO | Input State: E=-2428.6929, Fmax=27.0610, MinEig=-4.8184e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5258, 0.0055, 0.0292]
+  PRFO Quality: rho=1.0001
+CCQNGPUOptimizer:  104 01:29:11    -2429.698730       22.696545
+Driver Step 104: PRFO | Input State: E=-2429.6987, Fmax=22.6965, MinEig=-4.8253e+00, Trust=5.3619e-02
+  e_vector Overlaps (v0, v1, v2): [0.5466, 0.0033, 0.0314]
+  PRFO Quality: rho=0.9984
+CCQNGPUOptimizer:  105 01:29:12    -2430.610840       17.004925
+Driver Step 105: PRFO | Input State: E=-2430.6108, Fmax=17.0049, MinEig=-5.0084e+00, Trust=5.7500e-02
+  e_vector Overlaps (v0, v1, v2): [0.5959, 0.0034, 0.0212]
+  PRFO Quality: rho=0.9964
+CCQNGPUOptimizer:  106 01:29:13    -2431.253906       12.331958
+Driver Step 106: PRFO | Input State: E=-2431.2539, Fmax=12.3320, MinEig=-4.9811e+00, Trust=6.1662e-02
+  e_vector Overlaps (v0, v1, v2): [0.6145, 0.0078, 0.0158]
+  PRFO Quality: rho=0.9936
+CCQNGPUOptimizer:  107 01:29:13    -2431.692139        8.685103
+Driver Step 107: PRFO | Input State: E=-2431.6921, Fmax=8.6851, MinEig=-4.9646e+00, Trust=6.6125e-02
+  e_vector Overlaps (v0, v1, v2): [0.6164, 0.0082, 0.0146]
+  PRFO Quality: rho=0.9924
+CCQNGPUOptimizer:  108 01:29:14    -2431.989014        5.941707
+Driver Step 108: PRFO | Input State: E=-2431.9890, Fmax=5.9417, MinEig=-4.9675e+00, Trust=7.0911e-02
+  e_vector Overlaps (v0, v1, v2): [0.6114, 0.0066, 0.0161]
+  PRFO Quality: rho=0.9925
+CCQNGPUOptimizer:  109 01:29:14    -2432.194580        3.962157
+Driver Step 109: PRFO | Input State: E=-2432.1946, Fmax=3.9622, MinEig=-4.9809e+00, Trust=7.6044e-02
+  e_vector Overlaps (v0, v1, v2): [0.6047, 0.0045, 0.0204]
+  PRFO Quality: rho=0.9925
+CCQNGPUOptimizer:  110 01:29:15    -2432.346191        2.634555
+Driver Step 110: PRFO | Input State: E=-2432.3462, Fmax=2.6346, MinEig=-4.9903e+00, Trust=8.1548e-02
+  e_vector Overlaps (v0, v1, v2): [0.5991, 0.0025, 0.0273]
+  PRFO Quality: rho=0.9934
+CCQNGPUOptimizer:  111 01:29:15    -2432.472656        1.863738
+Driver Step 111: PRFO | Input State: E=-2432.4727, Fmax=1.8637, MinEig=-4.9573e+00, Trust=8.7450e-02
+  e_vector Overlaps (v0, v1, v2): [0.5971, 0.0000, 0.0388]
+  PRFO Quality: rho=0.9981
+CCQNGPUOptimizer:  112 01:29:16    -2432.593994        1.647294
+Driver Step 112: PRFO | Input State: E=-2432.5940, Fmax=1.6473, MinEig=-4.7958e+00, Trust=9.3780e-02
+  e_vector Overlaps (v0, v1, v2): [0.6010, 0.0030, 0.0651]
+  PRFO Quality: rho=0.9982
+CCQNGPUOptimizer:  113 01:29:16    -2432.723633        1.546226
+Driver Step 113: PRFO | Input State: E=-2432.7236, Fmax=1.5462, MinEig=-4.4458e+00, Trust=1.0057e-01
+  e_vector Overlaps (v0, v1, v2): [0.7528, 0.0169, 0.0116]
+  PRFO Quality: rho=1.0003
+CCQNGPUOptimizer:  114 01:29:17    -2432.868896        1.419506
+Driver Step 114: PRFO | Input State: E=-2432.8689, Fmax=1.4195, MinEig=-3.9775e+00, Trust=1.0785e-01
+  e_vector Overlaps (v0, v1, v2): [0.7433, 0.0132, 0.0018]
+  PRFO Quality: rho=1.0016
+CCQNGPUOptimizer:  115 01:29:17    -2433.032471        1.341190
+Driver Step 115: PRFO | Input State: E=-2433.0325, Fmax=1.3412, MinEig=-3.5710e+00, Trust=1.1565e-01
+  e_vector Overlaps (v0, v1, v2): [0.7343, 0.0080, 0.0054]
+  PRFO Quality: rho=1.0021
+CCQNGPUOptimizer:  116 01:29:17    -2433.215820        1.258645
+Driver Step 116: PRFO | Input State: E=-2433.2158, Fmax=1.2586, MinEig=-3.5358e+00, Trust=1.2402e-01
+  e_vector Overlaps (v0, v1, v2): [0.7269, 0.0022, 0.0250]
+  PRFO Quality: rho=1.0004
+CCQNGPUOptimizer:  117 01:29:18    -2433.415527        1.163914
+Driver Step 117: PRFO | Input State: E=-2433.4155, Fmax=1.1639, MinEig=-2.5140e+00, Trust=1.3300e-01
+  e_vector Overlaps (v0, v1, v2): [0.5691, 0.0087, 0.2903]
+  PRFO Quality: rho=1.0007
+CCQNGPUOptimizer:  118 01:29:18    -2433.488281        1.697716
+Driver Step 118: PRFO | Input State: E=-2433.4883, Fmax=1.6977, MinEig=-2.2195e+00, Trust=1.4263e-01
+  e_vector Overlaps (v0, v1, v2): [0.5106, 0.0458, 0.3453]
+  PRFO Quality: rho=0.9372
+CCQNGPUOptimizer:  119 01:29:19    -2433.581055        1.572774
+Driver Step 119: PRFO | Input State: E=-2433.5811, Fmax=1.5728, MinEig=-5.7047e+00, Trust=1.4263e-01
+  e_vector Overlaps (v0, v1, v2): [0.5144, 0.1284, 0.1954]
+  PRFO Quality: rho=1.0040
+CCQNGPUOptimizer:  120 01:29:19    -2433.695312        1.620265
+Driver Step 120: PRFO | Input State: E=-2433.6953, Fmax=1.6203, MinEig=-5.7111e+00, Trust=1.5295e-01
+  e_vector Overlaps (v0, v1, v2): [0.6327, 0.1906, 0.1492]
+  PRFO Quality: rho=1.0078
+CCQNGPUOptimizer:  121 01:29:20    -2433.811279        1.801017
+Driver Step 121: PRFO | Input State: E=-2433.8113, Fmax=1.8010, MinEig=-6.0165e+00, Trust=1.6402e-01
+  e_vector Overlaps (v0, v1, v2): [0.6349, 0.1297, 0.1858]
+  PRFO Quality: rho=1.0038
+CCQNGPUOptimizer:  122 01:29:20    -2433.889893        1.311048
+Driver Step 122: PRFO | Input State: E=-2433.8899, Fmax=1.3110, MinEig=-5.7885e+00, Trust=1.6402e-01
+  e_vector Overlaps (v0, v1, v2): [0.6461, 0.0794, 0.1729]
+  PRFO Quality: rho=1.0030
+CCQNGPUOptimizer:  123 01:29:20    -2433.977051        1.584560
+Driver Step 123: PRFO | Input State: E=-2433.9771, Fmax=1.5846, MinEig=-4.7199e+00, Trust=1.7589e-01
+  e_vector Overlaps (v0, v1, v2): [0.6224, 0.0776, 0.1393]
+  PRFO Quality: rho=1.1116
+CCQNGPUOptimizer:  124 01:29:21    -2434.026367        1.286749
+Driver Step 124: PRFO | Input State: E=-2434.0264, Fmax=1.2867, MinEig=-4.4248e+00, Trust=1.7589e-01
+  e_vector Overlaps (v0, v1, v2): [0.5380, 0.0282, 0.1926]
+  PRFO Quality: rho=0.9934
+CCQNGPUOptimizer:  125 01:29:21    -2434.080811        0.959621
+Driver Step 125: PRFO | Input State: E=-2434.0808, Fmax=0.9596, MinEig=-4.5118e+00, Trust=1.8863e-01
+  e_vector Overlaps (v0, v1, v2): [0.5453, 0.0290, 0.2968]
+  PRFO Quality: rho=1.0002
+CCQNGPUOptimizer:  126 01:29:22    -2434.123535        0.796724
+Driver Step 126: PRFO | Input State: E=-2434.1235, Fmax=0.7967, MinEig=-4.1191e+00, Trust=1.8863e-01
+  e_vector Overlaps (v0, v1, v2): [0.5206, 0.0552, 0.4222]
+  PRFO Quality: rho=1.0052
+CCQNGPUOptimizer:  127 01:29:22    -2434.168213        0.801698
+Driver Step 127: PRFO | Input State: E=-2434.1682, Fmax=0.8017, MinEig=-4.0139e+00, Trust=1.8863e-01
+  e_vector Overlaps (v0, v1, v2): [0.5946, 0.0720, 0.0095]
+  PRFO Quality: rho=0.9870
+CCQNGPUOptimizer:  128 01:29:22    -2434.198975        0.486195
+Driver Step 128: PRFO | Input State: E=-2434.1990, Fmax=0.4862, MinEig=-4.2576e+00, Trust=1.8863e-01
+  e_vector Overlaps (v0, v1, v2): [0.5024, 0.2301, 0.4362]
+  PRFO Quality: rho=0.9906
+CCQNGPUOptimizer:  129 01:29:23    -2434.251465        0.504843
+Driver Step 129: PRFO | Input State: E=-2434.2515, Fmax=0.5048, MinEig=-3.7358e+00, Trust=1.8863e-01
+  e_vector Overlaps (v0, v1, v2): [0.5466, 0.2181, 0.3495]
+  PRFO Quality: rho=0.9779
+CCQNGPUOptimizer:  130 01:29:23    -2434.280029        0.407645
+Driver Step 130: PRFO | Input State: E=-2434.2800, Fmax=0.4076, MinEig=-3.0373e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.4701, 0.3824, 0.0923]
+  PRFO Quality: rho=1.0625
+CCQNGPUOptimizer:  131 01:29:23    -2434.311035        0.527242
+Driver Step 131: PRFO | Input State: E=-2434.3110, Fmax=0.5272, MinEig=-2.9296e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.5845, 0.1737, 0.1762]
+  PRFO Quality: rho=1.0160
+CCQNGPUOptimizer:  132 01:29:24    -2434.345215        0.493604
+Driver Step 132: PRFO | Input State: E=-2434.3452, Fmax=0.4936, MinEig=-3.0327e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.6087, 0.1805, 0.1738]
+  PRFO Quality: rho=1.0031
+CCQNGPUOptimizer:  133 01:29:24    -2434.394287        0.496671
+Driver Step 133: PRFO | Input State: E=-2434.3943, Fmax=0.4967, MinEig=-3.0876e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.6072, 0.1353, 0.0780]
+  PRFO Quality: rho=1.0012
+CCQNGPUOptimizer:  134 01:29:25    -2434.440918        0.544864
+Driver Step 134: PRFO | Input State: E=-2434.4409, Fmax=0.5449, MinEig=-2.7530e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.4204, 0.4375, 0.1983]
+  PRFO Quality: rho=1.0370
+CCQNGPUOptimizer:  135 01:29:25    -2434.492920        0.779698
+Driver Step 135: PRFO | Input State: E=-2434.4929, Fmax=0.7797, MinEig=-4.2188e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.7272, 0.0347, 0.0636]
+  PRFO Quality: rho=1.0053
+CCQNGPUOptimizer:  136 01:29:26    -2434.533447        0.828408
+Driver Step 136: PRFO | Input State: E=-2434.5334, Fmax=0.8284, MinEig=-4.0113e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.7518, 0.0198, 0.1198]
+  PRFO Quality: rho=1.0406
+CCQNGPUOptimizer:  137 01:29:26    -2434.562988        1.079814
+Driver Step 137: PRFO | Input State: E=-2434.5630, Fmax=1.0798, MinEig=-4.6742e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.7535, 0.0653, 0.1335]
+  PRFO Quality: rho=0.9785
+CCQNGPUOptimizer:  138 01:29:26    -2434.607910        0.871204
+Driver Step 138: PRFO | Input State: E=-2434.6079, Fmax=0.8712, MinEig=-5.2908e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.7412, 0.0987, 0.1320]
+  PRFO Quality: rho=1.0060
+CCQNGPUOptimizer:  139 01:29:27    -2434.720459        1.408138
+Driver Step 139: PRFO | Input State: E=-2434.7205, Fmax=1.4081, MinEig=-6.0853e+00, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.7526, 0.0920, 0.0832]
+  PRFO Quality: rho=0.9995
+CCQNGPUOptimizer:  140 01:29:27    -2434.947510        1.888207
+Driver Step 140: PRFO | Input State: E=-2434.9475, Fmax=1.8882, MinEig=-1.2433e+01, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.7798, 0.2129, 0.0250]
+  PRFO Quality: rho=1.0483
+CCQNGPUOptimizer:  141 01:29:28    -2435.281982        1.370180
+Driver Step 141: PRFO | Input State: E=-2435.2820, Fmax=1.3702, MinEig=-1.0800e+01, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.8116, 0.0408, 0.0862]
+  PRFO Quality: rho=1.0539
+CCQNGPUOptimizer:  142 01:29:28    -2435.298340        3.980939
+Driver Step 142: PRFO | Input State: E=-2435.2983, Fmax=3.9809, MinEig=-1.0647e+01, Trust=2.0000e-01
+  e_vector Overlaps (v0, v1, v2): [0.8156, 0.0862, 0.0959]
+  PRFO Quality: rho=-0.5308
+CCQNGPUOptimizer:  143 01:29:29    -2435.446045        1.290736
+Driver Step 143: PRFO | Input State: E=-2435.4460, Fmax=1.2907, MinEig=-9.7282e+00, Trust=1.6125e-01
+  e_vector Overlaps (v0, v1, v2): [0.8174, 0.0843, 0.1427]
+  PRFO Quality: rho=0.9207
+CCQNGPUOptimizer:  144 01:29:29    -2435.503906        0.712526
+Driver Step 144: PRFO | Input State: E=-2435.5039, Fmax=0.7125, MinEig=-9.3002e+00, Trust=1.6125e-01
+  e_vector Overlaps (v0, v1, v2): [0.8107, 0.0808, 0.1398]
+  PRFO Quality: rho=0.9901
+CCQNGPUOptimizer:  145 01:29:29    -2435.571289        0.569288
+Driver Step 145: PRFO | Input State: E=-2435.5713, Fmax=0.5693, MinEig=-9.4507e+00, Trust=1.6125e-01
+  e_vector Overlaps (v0, v1, v2): [0.8350, 0.0667, 0.0792]
+  PRFO Quality: rho=0.9987
+CCQNGPUOptimizer:  146 01:29:30    -2435.656494        0.823086
+Driver Step 146: PRFO | Input State: E=-2435.6565, Fmax=0.8231, MinEig=-9.2129e+00, Trust=1.6125e-01
+  e_vector Overlaps (v0, v1, v2): [0.8429, 0.0892, 0.1194]
+  PRFO Quality: rho=1.0128
+CCQNGPUOptimizer:  147 01:29:30    -2435.677734        0.453836
+Driver Step 147: PRFO | Input State: E=-2435.6777, Fmax=0.4538, MinEig=-8.7124e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8486, 0.0991, 0.1116]
+  PRFO Quality: rho=1.0148
+CCQNGPUOptimizer:  148 01:29:31    -2435.718506        0.476466
+Driver Step 148: PRFO | Input State: E=-2435.7185, Fmax=0.4765, MinEig=-8.7213e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8479, 0.0980, 0.0242]
+  PRFO Quality: rho=1.0030
+CCQNGPUOptimizer:  149 01:29:31    -2435.787354        0.320636
+Driver Step 149: PRFO | Input State: E=-2435.7874, Fmax=0.3206, MinEig=-8.7329e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8462, 0.0934, 0.0064]
+  PRFO Quality: rho=1.0079
+CCQNGPUOptimizer:  150 01:29:31    -2435.808594        0.239030
+Driver Step 150: PRFO | Input State: E=-2435.8086, Fmax=0.2390, MinEig=-8.6798e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2082, 0.0154, 0.4572]
+  PRFO Quality: rho=0.9997
+CCQNGPUOptimizer:  151 01:29:32    -2435.827393        0.235799
+Driver Step 151: PRFO | Input State: E=-2435.8274, Fmax=0.2358, MinEig=-8.7459e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8446, 0.0589, 0.0374]
+  PRFO Quality: rho=1.0105
+CCQNGPUOptimizer:  152 01:29:32    -2435.850830        0.324321
+Driver Step 152: PRFO | Input State: E=-2435.8508, Fmax=0.3243, MinEig=-8.7214e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2051, 0.0112, 0.4490]
+  PRFO Quality: rho=0.9924
+CCQNGPUOptimizer:  153 01:29:33    -2435.863525        0.195887
+Driver Step 153: PRFO | Input State: E=-2435.8635, Fmax=0.1959, MinEig=-8.7263e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2065, 0.0365, 0.4430]
+  PRFO Quality: rho=1.0163
+CCQNGPUOptimizer:  154 01:29:33    -2435.873291        0.195940
+Driver Step 154: PRFO | Input State: E=-2435.8733, Fmax=0.1959, MinEig=-8.7272e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8420, 0.0731, 0.0401]
+  PRFO Quality: rho=0.9832
+CCQNGPUOptimizer:  155 01:29:33    -2435.885498        0.192586
+Driver Step 155: PRFO | Input State: E=-2435.8855, Fmax=0.1926, MinEig=-8.6902e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8433, 0.0579, 0.0540]
+  PRFO Quality: rho=1.0007
+CCQNGPUOptimizer:  156 01:29:34    -2435.893311        0.172923
+Driver Step 156: PRFO | Input State: E=-2435.8933, Fmax=0.1729, MinEig=-8.6770e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2040, 0.0280, 0.3820]
+  PRFO Quality: rho=1.0013
+CCQNGPUOptimizer:  157 01:29:34    -2435.899658        0.200005
+Driver Step 157: PRFO | Input State: E=-2435.8997, Fmax=0.2000, MinEig=-8.6764e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2065, 0.0144, 0.2967]
+  PRFO Quality: rho=1.0275
+CCQNGPUOptimizer:  158 01:29:35    -2435.906982        0.150204
+Driver Step 158: PRFO | Input State: E=-2435.9070, Fmax=0.1502, MinEig=-8.6611e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2063, 0.0323, 0.2298]
+  PRFO Quality: rho=0.9711
+CCQNGPUOptimizer:  159 01:29:35    -2435.915771        0.113239
+Driver Step 159: PRFO | Input State: E=-2435.9158, Fmax=0.1132, MinEig=-8.6648e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8433, 0.0399, 0.0913]
+  PRFO Quality: rho=0.9965
+CCQNGPUOptimizer:  160 01:29:35    -2435.922607        0.121076
+Driver Step 160: PRFO | Input State: E=-2435.9226, Fmax=0.1211, MinEig=-8.6628e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.2033, 0.0173, 0.0540]
+  PRFO Quality: rho=1.0197
+CCQNGPUOptimizer:  161 01:29:36    -2435.929688        0.163530
+Driver Step 161: PRFO | Input State: E=-2435.9297, Fmax=0.1635, MinEig=-8.6627e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8434, 0.0422, 0.0615]
+  PRFO Quality: rho=0.9890
+CCQNGPUOptimizer:  162 01:29:36    -2435.939941        0.135262
+Driver Step 162: PRFO | Input State: E=-2435.9399, Fmax=0.1353, MinEig=-8.6548e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8442, 0.0403, 0.0563]
+  PRFO Quality: rho=1.0182
+CCQNGPUOptimizer:  163 01:29:37    -2435.951660        0.138241
+Driver Step 163: PRFO | Input State: E=-2435.9517, Fmax=0.1382, MinEig=-8.6111e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8456, 0.0315, 0.0616]
+  PRFO Quality: rho=1.0032
+CCQNGPUOptimizer:  164 01:29:37    -2435.962402        0.169838
+Driver Step 164: PRFO | Input State: E=-2435.9624, Fmax=0.1698, MinEig=-8.5552e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8460, 0.0248, 0.0645]
+  PRFO Quality: rho=0.9771
+CCQNGPUOptimizer:  165 01:29:37    -2435.973633        0.174515
+Driver Step 165: PRFO | Input State: E=-2435.9736, Fmax=0.1745, MinEig=-8.5170e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8461, 0.0189, 0.0668]
+  PRFO Quality: rho=1.0053
+CCQNGPUOptimizer:  166 01:29:38    -2435.983643        0.133748
+Driver Step 166: PRFO | Input State: E=-2435.9836, Fmax=0.1337, MinEig=-8.4923e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1965, 0.0417, 0.0211]
+  PRFO Quality: rho=0.9925
+CCQNGPUOptimizer:  167 01:29:38    -2435.992188        0.131961
+Driver Step 167: PRFO | Input State: E=-2435.9922, Fmax=0.1320, MinEig=-8.4797e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1951, 0.0365, 0.0094]
+  PRFO Quality: rho=1.0222
+CCQNGPUOptimizer:  168 01:29:38    -2436.001465        0.188076
+Driver Step 168: PRFO | Input State: E=-2436.0015, Fmax=0.1881, MinEig=-8.4856e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1950, 0.0374, 0.0099]
+  PRFO Quality: rho=0.9970
+CCQNGPUOptimizer:  169 01:29:39    -2436.014648        0.250484
+Driver Step 169: PRFO | Input State: E=-2436.0146, Fmax=0.2505, MinEig=-8.4627e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1965, 0.0302, 0.0012]
+  PRFO Quality: rho=1.0018
+CCQNGPUOptimizer:  170 01:29:39    -2436.031738        0.214940
+Driver Step 170: PRFO | Input State: E=-2436.0317, Fmax=0.2149, MinEig=-8.4539e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8448, 0.0125, 0.0704]
+  PRFO Quality: rho=1.0004
+CCQNGPUOptimizer:  171 01:29:40    -2436.046875        0.198998
+Driver Step 171: PRFO | Input State: E=-2436.0469, Fmax=0.1990, MinEig=-8.4523e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8441, 0.0171, 0.0599]
+  PRFO Quality: rho=1.0136
+CCQNGPUOptimizer:  172 01:29:40    -2436.058350        0.306468
+Driver Step 172: PRFO | Input State: E=-2436.0583, Fmax=0.3065, MinEig=-8.4268e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8447, 0.0163, 0.0739]
+  PRFO Quality: rho=0.9900
+CCQNGPUOptimizer:  173 01:29:41    -2436.067139        0.181967
+Driver Step 173: PRFO | Input State: E=-2436.0671, Fmax=0.1820, MinEig=-8.4271e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8440, 0.0252, 0.0771]
+  PRFO Quality: rho=1.0480
+CCQNGPUOptimizer:  174 01:29:41    -2436.076904        0.212390
+Driver Step 174: PRFO | Input State: E=-2436.0769, Fmax=0.2124, MinEig=-8.4513e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8487, 0.0260, 0.0765]
+  PRFO Quality: rho=1.0116
+CCQNGPUOptimizer:  175 01:29:41    -2436.089600        0.447386
+Driver Step 175: PRFO | Input State: E=-2436.0896, Fmax=0.4474, MinEig=-8.4518e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8487, 0.0264, 0.0736]
+  PRFO Quality: rho=0.9987
+CCQNGPUOptimizer:  176 01:29:42    -2436.097900        0.148641
+Driver Step 176: PRFO | Input State: E=-2436.0979, Fmax=0.1486, MinEig=-8.4243e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8497, 0.0222, 0.0788]
+  PRFO Quality: rho=0.9931
+CCQNGPUOptimizer:  177 01:29:42    -2436.105713        0.182978
+Driver Step 177: PRFO | Input State: E=-2436.1057, Fmax=0.1830, MinEig=-8.3284e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8503, 0.0170, 0.0828]
+  PRFO Quality: rho=1.0006
+CCQNGPUOptimizer:  178 01:29:42    -2436.115967        0.192628
+Driver Step 178: PRFO | Input State: E=-2436.1160, Fmax=0.1926, MinEig=-8.3292e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1869, 0.0200, 0.0007]
+  PRFO Quality: rho=1.0150
+CCQNGPUOptimizer:  179 01:29:43    -2436.121338        0.117477
+Driver Step 179: PRFO | Input State: E=-2436.1213, Fmax=0.1175, MinEig=-8.3232e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8508, 0.0271, 0.0791]
+  PRFO Quality: rho=1.0309
+CCQNGPUOptimizer:  180 01:29:43    -2436.126465        0.260177
+Driver Step 180: PRFO | Input State: E=-2436.1265, Fmax=0.2602, MinEig=-8.2214e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8497, 0.0102, 0.0791]
+  PRFO Quality: rho=1.0324
+CCQNGPUOptimizer:  181 01:29:44    -2436.132324        0.107518
+Driver Step 181: PRFO | Input State: E=-2436.1323, Fmax=0.1075, MinEig=-8.1602e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8511, 0.0106, 0.0840]
+  PRFO Quality: rho=1.0401
+CCQNGPUOptimizer:  182 01:29:44    -2436.136963        0.087664
+Driver Step 182: PRFO | Input State: E=-2436.1370, Fmax=0.0877, MinEig=-8.1042e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1789, 0.0117, 0.0270]
+  PRFO Quality: rho=0.9619
+CCQNGPUOptimizer:  183 01:29:44    -2436.142090        0.109524
+Driver Step 183: PRFO | Input State: E=-2436.1421, Fmax=0.1095, MinEig=-8.1128e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8529, 0.0109, 0.0793]
+  PRFO Quality: rho=1.0246
+CCQNGPUOptimizer:  184 01:29:45    -2436.145996        0.098623
+Driver Step 184: PRFO | Input State: E=-2436.1460, Fmax=0.0986, MinEig=-8.0946e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8532, 0.0073, 0.0816]
+  PRFO Quality: rho=0.9937
+CCQNGPUOptimizer:  185 01:29:45    -2436.149902        0.089217
+Driver Step 185: PRFO | Input State: E=-2436.1499, Fmax=0.0892, MinEig=-8.0786e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8545, 0.0071, 0.0860]
+  PRFO Quality: rho=0.9702
+CCQNGPUOptimizer:  186 01:29:46    -2436.154297        0.086508
+Driver Step 186: PRFO | Input State: E=-2436.1543, Fmax=0.0865, MinEig=-8.0295e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8570, 0.0083, 0.0818]
+  PRFO Quality: rho=1.0045
+CCQNGPUOptimizer:  187 01:29:46    -2436.158447        0.074677
+Driver Step 187: PRFO | Input State: E=-2436.1584, Fmax=0.0747, MinEig=-7.9756e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8579, 0.0128, 0.0792]
+  PRFO Quality: rho=0.9899
+CCQNGPUOptimizer:  188 01:29:46    -2436.162598        0.075296
+Driver Step 188: PRFO | Input State: E=-2436.1626, Fmax=0.0753, MinEig=-7.9656e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8579, 0.0116, 0.0774]
+  PRFO Quality: rho=1.0625
+CCQNGPUOptimizer:  189 01:29:47    -2436.166260        0.116681
+Driver Step 189: PRFO | Input State: E=-2436.1663, Fmax=0.1167, MinEig=-7.9622e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8576, 0.0141, 0.0737]
+  PRFO Quality: rho=0.9861
+CCQNGPUOptimizer:  190 01:29:47    -2436.170654        0.095503
+Driver Step 190: PRFO | Input State: E=-2436.1707, Fmax=0.0955, MinEig=-7.9540e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1783, 0.0056, 0.0153]
+  PRFO Quality: rho=1.0197
+CCQNGPUOptimizer:  191 01:29:48    -2436.175293        0.087693
+Driver Step 191: PRFO | Input State: E=-2436.1753, Fmax=0.0877, MinEig=-7.9544e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8568, 0.0197, 0.0789]
+  PRFO Quality: rho=0.9582
+CCQNGPUOptimizer:  192 01:29:48    -2436.181152        0.112496
+Driver Step 192: PRFO | Input State: E=-2436.1812, Fmax=0.1125, MinEig=-7.9393e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8558, 0.0160, 0.0755]
+  PRFO Quality: rho=1.0360
+CCQNGPUOptimizer:  193 01:29:48    -2436.185303        0.117015
+Driver Step 193: PRFO | Input State: E=-2436.1853, Fmax=0.1170, MinEig=-7.8805e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8547, 0.0156, 0.0688]
+  PRFO Quality: rho=0.9690
+CCQNGPUOptimizer:  194 01:29:49    -2436.190430        0.105904
+Driver Step 194: PRFO | Input State: E=-2436.1904, Fmax=0.1059, MinEig=-7.8312e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8552, 0.0153, 0.0632]
+  PRFO Quality: rho=1.0056
+CCQNGPUOptimizer:  195 01:29:49    -2436.195801        0.099756
+Driver Step 195: PRFO | Input State: E=-2436.1958, Fmax=0.0998, MinEig=-7.7597e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8572, 0.0134, 0.0592]
+  PRFO Quality: rho=0.9841
+CCQNGPUOptimizer:  196 01:29:49    -2436.200684        0.096188
+Driver Step 196: PRFO | Input State: E=-2436.2007, Fmax=0.0962, MinEig=-7.6504e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8609, 0.0081, 0.0521]
+  PRFO Quality: rho=1.0040
+CCQNGPUOptimizer:  197 01:29:50    -2436.205322        0.076864
+Driver Step 197: PRFO | Input State: E=-2436.2053, Fmax=0.0769, MinEig=-7.6004e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8617, 0.0062, 0.0512]
+  PRFO Quality: rho=1.0451
+CCQNGPUOptimizer:  198 01:29:50    -2436.209473        0.079365
+Driver Step 198: PRFO | Input State: E=-2436.2095, Fmax=0.0794, MinEig=-7.5897e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8618, 0.0043, 0.0490]
+  PRFO Quality: rho=0.9377
+CCQNGPUOptimizer:  199 01:29:51    -2436.213867        0.076104
+Driver Step 199: PRFO | Input State: E=-2436.2139, Fmax=0.0761, MinEig=-7.5801e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1581, 0.0036, 0.0069]
+  PRFO Quality: rho=1.0202
+CCQNGPUOptimizer:  200 01:29:51    -2436.218262        0.083419
+Driver Step 200: PRFO | Input State: E=-2436.2183, Fmax=0.0834, MinEig=-7.5826e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8608, 0.0029, 0.0427]
+  PRFO Quality: rho=1.0119
+CCQNGPUOptimizer:  201 01:29:51    -2436.223145        0.098114
+Driver Step 201: PRFO | Input State: E=-2436.2231, Fmax=0.0981, MinEig=-7.5746e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8597, 0.0051, 0.0275]
+  PRFO Quality: rho=1.0373
+CCQNGPUOptimizer:  202 01:29:52    -2436.227539        0.107978
+Driver Step 202: PRFO | Input State: E=-2436.2275, Fmax=0.1080, MinEig=-7.5625e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8590, 0.0063, 0.0553]
+  PRFO Quality: rho=0.9740
+CCQNGPUOptimizer:  203 01:29:52    -2436.231689        0.096011
+Driver Step 203: PRFO | Input State: E=-2436.2317, Fmax=0.0960, MinEig=-7.5570e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8581, 0.0059, 0.0551]
+  PRFO Quality: rho=0.9998
+CCQNGPUOptimizer:  204 01:29:53    -2436.236816        0.103412
+Driver Step 204: PRFO | Input State: E=-2436.2368, Fmax=0.1034, MinEig=-7.5549e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8578, 0.0065, 0.0533]
+  PRFO Quality: rho=0.9752
+CCQNGPUOptimizer:  205 01:29:53    -2436.241943        0.103185
+Driver Step 205: PRFO | Input State: E=-2436.2419, Fmax=0.1032, MinEig=-7.5522e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8573, 0.0067, 0.0422]
+  PRFO Quality: rho=0.9980
+CCQNGPUOptimizer:  206 01:29:53    -2436.248779        0.101053
+Driver Step 206: PRFO | Input State: E=-2436.2488, Fmax=0.1011, MinEig=-7.5427e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8563, 0.0047, 0.0201]
+  PRFO Quality: rho=1.0045
+CCQNGPUOptimizer:  207 01:29:54    -2436.256348        0.119420
+Driver Step 207: PRFO | Input State: E=-2436.2563, Fmax=0.1194, MinEig=-7.4959e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8555, 0.0018, 0.0016]
+  PRFO Quality: rho=1.0074
+CCQNGPUOptimizer:  208 01:29:54    -2436.263916        0.120545
+Driver Step 208: PRFO | Input State: E=-2436.2639, Fmax=0.1205, MinEig=-7.4955e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1587, 0.0103, 0.0064]
+  PRFO Quality: rho=1.0381
+CCQNGPUOptimizer:  209 01:29:55    -2436.270996        0.107392
+Driver Step 209: PRFO | Input State: E=-2436.2710, Fmax=0.1074, MinEig=-7.4934e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.1586, 0.0142, 0.0117]
+  PRFO Quality: rho=0.9886
+CCQNGPUOptimizer:  210 01:29:55    -2436.278564        0.096999
+Driver Step 210: PRFO | Input State: E=-2436.2786, Fmax=0.0970, MinEig=-7.4937e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8536, 0.0009, 0.0018]
+  PRFO Quality: rho=0.9729
+CCQNGPUOptimizer:  211 01:29:56    -2436.285889        0.087376
+Driver Step 211: PRFO | Input State: E=-2436.2859, Fmax=0.0874, MinEig=-7.4905e+00, Trust=1.7292e-01
+  e_vector Overlaps (v0, v1, v2): [0.8531, 0.0001, 0.0086]
+  PRFO Quality: rho=1.0235
+CCQNGPUOptimizer:  212 01:29:56    -2436.295166        0.096272
+Driver Step 212: PRFO | Input State: E=-2436.2952, Fmax=0.0963, MinEig=-7.3951e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8542, 0.0032, 0.0009]
+  PRFO Quality: rho=1.0023
+CCQNGPUOptimizer:  213 01:29:56    -2436.302002        0.124299
+Driver Step 213: PRFO | Input State: E=-2436.3020, Fmax=0.1243, MinEig=-7.2795e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.1672, 0.0125, 0.0193]
+  PRFO Quality: rho=1.0036
+CCQNGPUOptimizer:  214 01:29:57    -2436.310059        0.129169
+Driver Step 214: PRFO | Input State: E=-2436.3101, Fmax=0.1292, MinEig=-7.2878e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8557, 0.0069, 0.0000]
+  PRFO Quality: rho=1.0002
+CCQNGPUOptimizer:  215 01:29:57    -2436.316895        0.113659
+Driver Step 215: PRFO | Input State: E=-2436.3169, Fmax=0.1137, MinEig=-7.2968e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8543, 0.0084, 0.0054]
+  PRFO Quality: rho=1.0080
+CCQNGPUOptimizer:  216 01:29:57    -2436.323975        0.114291
+Driver Step 216: PRFO | Input State: E=-2436.3240, Fmax=0.1143, MinEig=-7.2679e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.1671, 0.0108, 0.0136]
+  PRFO Quality: rho=0.9787
+CCQNGPUOptimizer:  217 01:29:58    -2436.330322        0.112052
+Driver Step 217: PRFO | Input State: E=-2436.3303, Fmax=0.1121, MinEig=-7.2863e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8544, 0.0079, 0.0159]
+  PRFO Quality: rho=1.0177
+CCQNGPUOptimizer:  218 01:29:58    -2436.337158        0.107218
+Driver Step 218: PRFO | Input State: E=-2436.3372, Fmax=0.1072, MinEig=-7.0007e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8551, 0.0056, 0.0085]
+  PRFO Quality: rho=0.9855
+CCQNGPUOptimizer:  219 01:29:59    -2436.342285        0.109821
+Driver Step 219: PRFO | Input State: E=-2436.3423, Fmax=0.1098, MinEig=-6.8428e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.1768, 0.0144, 0.0101]
+  PRFO Quality: rho=1.0032
+CCQNGPUOptimizer:  220 01:29:59    -2436.350342        0.148292
+Driver Step 220: PRFO | Input State: E=-2436.3503, Fmax=0.1483, MinEig=-6.7808e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8515, 0.0024, 0.0088]
+  PRFO Quality: rho=1.0232
+CCQNGPUOptimizer:  221 01:29:59    -2436.355957        0.112329
+Driver Step 221: PRFO | Input State: E=-2436.3560, Fmax=0.1123, MinEig=-6.8242e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8523, 0.0029, 0.0127]
+  PRFO Quality: rho=1.0109
+CCQNGPUOptimizer:  222 01:30:00    -2436.362793        0.167695
+Driver Step 222: PRFO | Input State: E=-2436.3628, Fmax=0.1677, MinEig=-6.6875e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8515, 0.0007, 0.0072]
+  PRFO Quality: rho=1.0026
+CCQNGPUOptimizer:  223 01:30:00    -2436.366943        0.139990
+Driver Step 223: PRFO | Input State: E=-2436.3669, Fmax=0.1400, MinEig=-6.5939e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8531, 0.0035, 0.0034]
+  PRFO Quality: rho=0.9982
+CCQNGPUOptimizer:  224 01:30:01    -2436.375488        0.172610
+Driver Step 224: PRFO | Input State: E=-2436.3755, Fmax=0.1726, MinEig=-6.5327e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.1852, 0.0191, 0.0079]
+  PRFO Quality: rho=0.9846
+CCQNGPUOptimizer:  225 01:30:01    -2436.381348        0.157359
+Driver Step 225: PRFO | Input State: E=-2436.3813, Fmax=0.1574, MinEig=-6.6468e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8492, 0.0031, 0.0030]
+  PRFO Quality: rho=1.0303
+CCQNGPUOptimizer:  226 01:30:01    -2436.389648        0.111987
+Driver Step 226: PRFO | Input State: E=-2436.3896, Fmax=0.1120, MinEig=-6.5169e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8448, 0.0008, 0.0006]
+  PRFO Quality: rho=0.9575
+CCQNGPUOptimizer:  227 01:30:02    -2436.394287        0.120101
+Driver Step 227: PRFO | Input State: E=-2436.3943, Fmax=0.1201, MinEig=-6.4301e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.1891, 0.0222, 0.0137]
+  PRFO Quality: rho=1.0669
+CCQNGPUOptimizer:  228 01:30:02    -2436.400391        0.175042
+Driver Step 228: PRFO | Input State: E=-2436.4004, Fmax=0.1750, MinEig=-6.4120e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8430, 0.0054, 0.0111]
+  PRFO Quality: rho=1.0187
+CCQNGPUOptimizer:  229 01:30:02    -2436.406738        0.107972
+Driver Step 229: PRFO | Input State: E=-2436.4067, Fmax=0.1080, MinEig=-6.4059e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.1893, 0.0202, 0.0128]
+  PRFO Quality: rho=0.9974
+CCQNGPUOptimizer:  230 01:30:03    -2436.413574        0.151981
+Driver Step 230: PRFO | Input State: E=-2436.4136, Fmax=0.1520, MinEig=-6.4028e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8420, 0.0041, 0.0250]
+  PRFO Quality: rho=1.0196
+CCQNGPUOptimizer:  231 01:30:03    -2436.419678        0.126062
+Driver Step 231: PRFO | Input State: E=-2436.4197, Fmax=0.1261, MinEig=-6.3760e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8411, 0.0039, 0.0453]
+  PRFO Quality: rho=0.9967
+CCQNGPUOptimizer:  232 01:30:04    -2436.425781        0.095760
+Driver Step 232: PRFO | Input State: E=-2436.4258, Fmax=0.0958, MinEig=-6.3898e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8405, 0.0030, 0.0402]
+  PRFO Quality: rho=1.0145
+CCQNGPUOptimizer:  233 01:30:04    -2436.433838        0.204853
+Driver Step 233: PRFO | Input State: E=-2436.4338, Fmax=0.2049, MinEig=-6.3815e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8395, 0.0029, 0.0423]
+  PRFO Quality: rho=0.9844
+CCQNGPUOptimizer:  234 01:30:04    -2436.441895        0.168785
+Driver Step 234: PRFO | Input State: E=-2436.4419, Fmax=0.1688, MinEig=-6.3769e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8387, 0.0025, 0.0382]
+  PRFO Quality: rho=1.0138
+CCQNGPUOptimizer:  235 01:30:05    -2436.452637        0.130482
+Driver Step 235: PRFO | Input State: E=-2436.4526, Fmax=0.1305, MinEig=-6.3762e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8379, 0.0039, 0.0380]
+  PRFO Quality: rho=0.9900
+CCQNGPUOptimizer:  236 01:30:05    -2436.459961        0.117426
+Driver Step 236: PRFO | Input State: E=-2436.4600, Fmax=0.1174, MinEig=-6.3761e+00, Trust=1.8543e-01
+  e_vector Overlaps (v0, v1, v2): [0.8372, 0.0037, 0.0184]
+  PRFO Quality: rho=1.0335
+CCQNGPUOptimizer:  237 01:30:06    -2436.467285        0.147713
+Driver Step 237: PRFO | Input State: E=-2436.4673, Fmax=0.1477, MinEig=-6.3616e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8370, 0.0053, 0.0500]
+  PRFO Quality: rho=0.9829
+CCQNGPUOptimizer:  238 01:30:06    -2436.474854        0.116863
+Driver Step 238: PRFO | Input State: E=-2436.4749, Fmax=0.1169, MinEig=-6.3303e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8364, 0.0032, 0.0517]
+  PRFO Quality: rho=1.0356
+CCQNGPUOptimizer:  239 01:30:06    -2436.483887        0.106489
+Driver Step 239: PRFO | Input State: E=-2436.4839, Fmax=0.1065, MinEig=-6.3062e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8368, 0.0012, 0.0505]
+  PRFO Quality: rho=0.9915
+CCQNGPUOptimizer:  240 01:30:07    -2436.493164        0.103936
+Driver Step 240: PRFO | Input State: E=-2436.4932, Fmax=0.1039, MinEig=-6.2739e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8360, 0.0007, 0.0475]
+  PRFO Quality: rho=1.0018
+CCQNGPUOptimizer:  241 01:30:07    -2436.501709        0.115115
+Driver Step 241: PRFO | Input State: E=-2436.5017, Fmax=0.1151, MinEig=-6.2631e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8356, 0.0022, 0.0447]
+  PRFO Quality: rho=0.9964
+CCQNGPUOptimizer:  242 01:30:08    -2436.511475        0.137982
+Driver Step 242: PRFO | Input State: E=-2436.5115, Fmax=0.1380, MinEig=-6.2635e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8352, 0.0029, 0.0402]
+  PRFO Quality: rho=1.0077
+CCQNGPUOptimizer:  243 01:30:08    -2436.521973        0.131465
+Driver Step 243: PRFO | Input State: E=-2436.5220, Fmax=0.1315, MinEig=-6.2434e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8351, 0.0004, 0.0362]
+  PRFO Quality: rho=0.9989
+CCQNGPUOptimizer:  244 01:30:08    -2436.530762        0.225814
+Driver Step 244: PRFO | Input State: E=-2436.5308, Fmax=0.2258, MinEig=-6.2212e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8351, 0.0020, 0.0370]
+  PRFO Quality: rho=0.9988
+CCQNGPUOptimizer:  245 01:30:09    -2436.537109        0.107994
+Driver Step 245: PRFO | Input State: E=-2436.5371, Fmax=0.1080, MinEig=-6.1744e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8352, 0.0034, 0.0282]
+  PRFO Quality: rho=1.0170
+CCQNGPUOptimizer:  246 01:30:09    -2436.543701        0.113908
+Driver Step 246: PRFO | Input State: E=-2436.5437, Fmax=0.1139, MinEig=-6.0862e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8360, 0.0034, 0.0149]
+  PRFO Quality: rho=1.0027
+CCQNGPUOptimizer:  247 01:30:10    -2436.553711        0.110898
+Driver Step 247: PRFO | Input State: E=-2436.5537, Fmax=0.1109, MinEig=-6.0866e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8350, 0.0036, 0.0070]
+  PRFO Quality: rho=1.0004
+CCQNGPUOptimizer:  248 01:30:10    -2436.559326        0.090656
+Driver Step 248: PRFO | Input State: E=-2436.5593, Fmax=0.0907, MinEig=-6.0749e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8346, 0.0026, 0.0144]
+  PRFO Quality: rho=1.0049
+CCQNGPUOptimizer:  249 01:30:11    -2436.567139        0.087651
+Driver Step 249: PRFO | Input State: E=-2436.5671, Fmax=0.0877, MinEig=-6.0695e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.1977, 0.0038, 0.0273]
+  PRFO Quality: rho=1.0008
+CCQNGPUOptimizer:  250 01:30:11    -2436.572510        0.187687
+Driver Step 250: PRFO | Input State: E=-2436.5725, Fmax=0.1877, MinEig=-6.0694e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8342, 0.0024, 0.0131]
+  PRFO Quality: rho=1.0071
+CCQNGPUOptimizer:  251 01:30:12    -2436.577148        0.097054
+Driver Step 251: PRFO | Input State: E=-2436.5771, Fmax=0.0971, MinEig=-6.0753e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8337, 0.0009, 0.0114]
+  PRFO Quality: rho=1.0032
+CCQNGPUOptimizer:  252 01:30:12    -2436.583984        0.090749
+Driver Step 252: PRFO | Input State: E=-2436.5840, Fmax=0.0907, MinEig=-6.0733e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8334, 0.0013, 0.0128]
+  PRFO Quality: rho=1.0169
+CCQNGPUOptimizer:  253 01:30:12    -2436.589111        0.094439
+Driver Step 253: PRFO | Input State: E=-2436.5891, Fmax=0.0944, MinEig=-6.0725e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8332, 0.0016, 0.0139]
+  PRFO Quality: rho=1.0012
+CCQNGPUOptimizer:  254 01:30:13    -2436.594238        0.081733
+Driver Step 254: PRFO | Input State: E=-2436.5942, Fmax=0.0817, MinEig=-6.0349e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8333, 0.0009, 0.0017]
+  PRFO Quality: rho=1.0118
+CCQNGPUOptimizer:  255 01:30:13    -2436.597900        0.073794
+Driver Step 255: PRFO | Input State: E=-2436.5979, Fmax=0.0738, MinEig=-5.9715e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8327, 0.0015, 0.0051]
+  PRFO Quality: rho=0.9442
+CCQNGPUOptimizer:  256 01:30:14    -2436.602295        0.088984
+Driver Step 256: PRFO | Input State: E=-2436.6023, Fmax=0.0890, MinEig=-5.9876e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8313, 0.0003, 0.0015]
+  PRFO Quality: rho=1.0494
+CCQNGPUOptimizer:  257 01:30:14    -2436.605713        0.069878
+Driver Step 257: PRFO | Input State: E=-2436.6057, Fmax=0.0699, MinEig=-5.9766e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.1976, 0.0058, 0.0022]
+  PRFO Quality: rho=0.9413
+CCQNGPUOptimizer:  258 01:30:14    -2436.608887        0.064290
+Driver Step 258: PRFO | Input State: E=-2436.6089, Fmax=0.0643, MinEig=-5.9751e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.1910, 0.0047, 0.0030]
+  PRFO Quality: rho=1.0116
+CCQNGPUOptimizer:  259 01:30:15    -2436.611816        0.088559
+Driver Step 259: PRFO | Input State: E=-2436.6118, Fmax=0.0886, MinEig=-5.9417e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8310, 0.0020, 0.0089]
+  PRFO Quality: rho=1.0314
+CCQNGPUOptimizer:  260 01:30:15    -2436.615234        0.103987
+Driver Step 260: PRFO | Input State: E=-2436.6152, Fmax=0.1040, MinEig=-5.8776e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8325, 0.0010, 0.0011]
+  PRFO Quality: rho=1.0063
+CCQNGPUOptimizer:  261 01:30:15    -2436.617676        0.067868
+Driver Step 261: PRFO | Input State: E=-2436.6177, Fmax=0.0679, MinEig=-5.8473e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8319, 0.0004, 0.0009]
+  PRFO Quality: rho=0.9816
+CCQNGPUOptimizer:  262 01:30:16    -2436.620361        0.074377
+Driver Step 262: PRFO | Input State: E=-2436.6204, Fmax=0.0744, MinEig=-5.8480e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8309, 0.0030, 0.0047]
+  PRFO Quality: rho=0.9626
+CCQNGPUOptimizer:  263 01:30:16    -2436.623291        0.071493
+Driver Step 263: PRFO | Input State: E=-2436.6233, Fmax=0.0715, MinEig=-5.8559e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8354, 0.0007, 0.0017]
+  PRFO Quality: rho=0.9879
+CCQNGPUOptimizer:  264 01:30:17    -2436.626709        0.086442
+Driver Step 264: PRFO | Input State: E=-2436.6267, Fmax=0.0864, MinEig=-5.6974e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8371, 0.0010, 0.0063]
+  PRFO Quality: rho=1.0838
+CCQNGPUOptimizer:  265 01:30:17    -2436.628906        0.062455
+Driver Step 265: PRFO | Input State: E=-2436.6289, Fmax=0.0625, MinEig=-5.6544e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.1880, 0.0089, 0.0005]
+  PRFO Quality: rho=0.9631
+CCQNGPUOptimizer:  266 01:30:17    -2436.631348        0.063908
+Driver Step 266: PRFO | Input State: E=-2436.6313, Fmax=0.0639, MinEig=-5.6510e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8383, 0.0035, 0.0049]
+  PRFO Quality: rho=0.9386
+CCQNGPUOptimizer:  267 01:30:18    -2436.634277        0.071488
+Driver Step 267: PRFO | Input State: E=-2436.6343, Fmax=0.0715, MinEig=-5.6734e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8377, 0.0075, 0.0065]
+  PRFO Quality: rho=0.9958
+CCQNGPUOptimizer:  268 01:30:18    -2436.637451        0.055781
+Driver Step 268: PRFO | Input State: E=-2436.6375, Fmax=0.0558, MinEig=-5.6627e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8370, 0.0085, 0.0068]
+  PRFO Quality: rho=1.0590
+CCQNGPUOptimizer:  269 01:30:19    -2436.639893        0.050277
+Driver Step 269: PRFO | Input State: E=-2436.6399, Fmax=0.0503, MinEig=-5.6464e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.8363, 0.0024, 0.0031]
+  PRFO Quality: rho=1.0423
+CCQNGPUOptimizer:  270 01:30:19    -2436.641846        0.050140
+Driver Step 270: PRFO | Input State: E=-2436.6418, Fmax=0.0501, MinEig=-5.5409e+00, Trust=1.9885e-01
+  e_vector Overlaps (v0, v1, v2): [0.1872, 0.0066, 0.0024]
+  PRFO Quality: rho=0.9868
+CCQNGPUOptimizer:  271 01:30:19    -2436.644043        0.049102
