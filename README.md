@@ -70,10 +70,46 @@ for _ in range(10):
     opt.step()
 ```
 
+## GPU Acceleration with MACE
+For heavy workloads, you can use the GPU-accelerated optimizer with ML potentials like MACE:
+
+```python
+import os
+from ase.io import read
+from mace.calculators import MACECalculator
+from algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
+
+# Load structure
+atoms = read('examples/IS.cif', index=-1)
+
+# Initialize MACE Calculator (requires mace-torch installed)
+atoms.calc = MACECalculator(
+    model_paths='/path/to/mace.model',
+    device='cuda',
+    default_dtype='float32'
+)
+
+# Initialize CCQN GPU Optimizer
+opt = CCQNGPUOptimizer(
+    atoms,
+    uphill_use_slsqp=False,
+    uphill_use_alm=False,
+    uphill_use_adam=False,
+    uphill_max_iter=500,
+    reactive_bonds=[(23, 24), (24, 317)],
+    e_vector_method='ic',
+    cos_phi=0.3,
+    trajectory='ccqn.traj'
+)
+opt.run(fmax=0.05, steps=500)
+```
+
 ## Examples
 - Interp/IDPP demo: examples/interp_demo.py
 - Frequency demo: examples/freq_demo.py
 - IRC demo: examples/irc_demo.py
+- CCQN GPU demo: examples/ccqn_gpu_demo.py
+- Full Freq & IRC GPU demo: examples/full_irc_gpu_demo.py
   - If sella is not installed, the script will print a message and exit without error.
 
 ## Notes

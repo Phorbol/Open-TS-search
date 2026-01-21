@@ -1,0 +1,81 @@
+CCQN-GPU (Driver-based) initialized on device: cuda
+                  Step     Time          Energy          fmax
+CCQNGPUOptimizer:    0 01:28:05    -2437.181641        0.016876
+Driver Step   0: UPHILL | Input State: E=-2437.1816, Fmax=0.0169, MinEig=7.0000e+01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.0000, 0.0000, 0.0000]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.8579
+CCQNGPUOptimizer:    1 01:28:06    -2436.858398        1.671965
+Driver Step   1: UPHILL | Input State: E=-2436.8584, Fmax=1.6720, MinEig=4.0870e+01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.6671, 0.0195, 0.0306]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.6893
+CCQNGPUOptimizer:    2 01:28:07    -2437.022705        2.428171
+Driver Step   2: UPHILL | Input State: E=-2437.0227, Fmax=2.4282, MinEig=3.5364e+01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.8934, 0.0288, 0.0002]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = -0.1017
+CCQNGPUOptimizer:    3 01:28:07    -2436.931885        2.760871
+Driver Step   3: UPHILL | Input State: E=-2436.9319, Fmax=2.7609, MinEig=1.2436e+01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.6692, 0.3180, 0.6147]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.0255
+CCQNGPUOptimizer:    4 01:28:08    -2436.870605        2.687259
+Driver Step   4: UPHILL | Input State: E=-2436.8706, Fmax=2.6873, MinEig=4.5771e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5611, 0.6400, 0.0109]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.0174
+CCQNGPUOptimizer:    5 01:28:09    -2436.811279        2.439023
+Driver Step   5: UPHILL | Input State: E=-2436.8113, Fmax=2.4390, MinEig=3.5479e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.5374, 0.5253, 0.0982]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1854
+CCQNGPUOptimizer:    6 01:28:09    -2436.720703        2.864410
+Driver Step   6: UPHILL | Input State: E=-2436.7207, Fmax=2.8644, MinEig=1.4771e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4717, 0.4670, 0.4924]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1626
+CCQNGPUOptimizer:    7 01:28:10    -2436.635254        3.041926
+Driver Step   7: UPHILL | Input State: E=-2436.6353, Fmax=3.0419, MinEig=1.1112e+00, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4446, 0.2845, 0.5823]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1756
+CCQNGPUOptimizer:    8 01:28:10    -2436.537842        3.135363
+Driver Step   8: UPHILL | Input State: E=-2436.5378, Fmax=3.1354, MinEig=8.1698e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4424, 0.2637, 0.4938]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1893
+CCQNGPUOptimizer:    9 01:28:11    -2436.428223        3.541270
+Driver Step   9: UPHILL | Input State: E=-2436.4282, Fmax=3.5413, MinEig=6.8910e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4363, 0.1986, 0.4520]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1901
+CCQNGPUOptimizer:   10 01:28:11    -2436.309082        3.878493
+Driver Step  10: UPHILL | Input State: E=-2436.3091, Fmax=3.8785, MinEig=6.3485e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4351, 0.1708, 0.4251]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1917
+CCQNGPUOptimizer:   11 01:28:12    -2436.179688        4.170968
+Driver Step  11: UPHILL | Input State: E=-2436.1797, Fmax=4.1710, MinEig=6.0078e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4371, 0.1619, 0.4178]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1927
+CCQNGPUOptimizer:   12 01:28:13    -2436.041504        4.449369
+Driver Step  12: UPHILL | Input State: E=-2436.0415, Fmax=4.4494, MinEig=5.9164e-01, Trust=5.0000e-02
+  e_vector Overlaps (v0, v1, v2): [0.4399, 0.1717, 0.4135]
+  Uphill Direction Analysis:
+    Cos(step, e_vec) = 0.5000 (Target > 0.5000)
+    Cos(step, grad)  = 0.1930
+CCQNGPUOptimizer:   13 01:28:14    -2435.894531        4.720937
