@@ -34,29 +34,35 @@ class GPUHessianManager:
         try:
             if eigvals is None or eigvecs is None:
                 eigvals, eigvecs = torch.linalg.eigh(B)
-            # B_tilde construction ensuring positive definiteness proxy
-            B_tilde = eigvecs @ (torch.diag(torch.abs(eigvals)) @ eigvecs.T)
+            # Optimized z = |B| s calculation without forming full B_tilde
+            s_proj = eigvecs.T @ s
+            z = eigvecs @ (torch.abs(eigvals) * s_proj)
         except RuntimeError:
             if logfile:
                 logfile.write("Warning: Hessian diagonalization failed in update. Using B directly.\n")
-            B_tilde = B
+            z = B @ s
         
-        # Calculate update terms
-        # s and y are 1D tensors. @ operator works as dot product for 1D.
+        # sMs = s.T @ M_k @ s = (s.T y)^2 + (s.T z)^2
+        sTy = torch.dot(s, y)
+        sTz = torch.dot(s, z)
         
-        # Term: s^T * B_tilde * s (scalar)
-        s_B_s = s @ (B_tilde @ s)
-        
-        M_k = torch.outer(y, y) + s_B_s * B_tilde
-        j_k = y - (B @ s)
-        sMs = s @ (M_k @ s)
+        sMs = sTy**2 + sTz**2
         
         if abs(sMs) < 1e-12:
             return B
         
-        u_k = (M_k @ s) / sMs
-        jTs = j_k @ s
+        # u_k = (M_k @ s) / sMs
+        # M_k @ s = (s.T y) y + (s.T z) z
+        Mks = sTy * y + sTz * z
+        u_k = Mks / sMs
         
-        delta_B = torch.outer(j_k, u_k) + torch.outer(u_k, j_k) - jTs * torch.outer(u_k, u_k)
+        j_k = y - (B @ s)
+        jTs = torch.dot(j_k, s)
+        
+        term1 = torch.outer(j_k, u_k)
+        term2 = torch.outer(u_k, j_k)
+        term3 = jTs * torch.outer(u_k, u_k)
+        
+        delta_B = term1 + term2 - term3
         
         return B + delta_B
