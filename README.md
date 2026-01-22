@@ -97,6 +97,7 @@ opt = CCQNGPUOptimizer(
     uphill_max_iter=500,
     reactive_bonds=[(23, 24), (24, 317)],
     e_vector_method='ic',
+    ic_mode='weighted',
     cos_phi=0.3,
     trajectory='ccqn.traj'
 )
