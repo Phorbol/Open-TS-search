@@ -80,7 +80,8 @@ def main():
             uphill_max_iter=500,     # PGD iterations
             reactive_bonds=[(23, 24), (24, 317)], 
             e_vector_method='ic', 
-            cos_phi=0.5,
+            cos_phi=0.3,
+            ic_mode='weighted',
             logfile='ccqn_run.log',
             trajectory='ccqn_run.traj'
         )

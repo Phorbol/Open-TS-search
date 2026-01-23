@@ -227,3 +227,38 @@ class CCQNGPUDriver:
     def _calculate_rho(self, pred, actual):
         if abs(pred) < 1e-4: return 1.0 if abs(actual) < 1e-4 else 0.0
         return actual / pred
+
+    def _record_step_data(self, s_k, e_vec, g_k, e_k):
+        """Record step data for debugging/trajectory analysis."""
+        # Helper to convert to numpy safely
+        def to_np(t):
+            if isinstance(t, torch.Tensor):
+                return t.detach().cpu().numpy().flatten()
+            elif isinstance(t, np.ndarray):
+                return t.flatten()
+            return np.zeros_like(self.log_data['gradients'][-1]) if self.log_data['gradients'] else np.array([])
+
+        # Handle s_k potentially being None (though unlikely if compute_step completes)
+        if s_k is None:
+             s_val = np.zeros_like(to_np(g_k))
+        else:
+             s_val = to_np(s_k)
+
+        self.log_data['steps'].append(s_val)
+        self.log_data['e_vectors'].append(to_np(e_vec))
+        self.log_data['gradients'].append(to_np(g_k))
+        self.log_data['modes'].append(self.mode)
+        self.log_data['energies'].append(float(e_k))
+
+    def save_trajectory_log(self, filename="optimization_log.npz"):
+        """Save the recorded trajectory log to a .npz file."""
+        try:
+            np.savez(filename,
+                     steps=np.array(self.log_data['steps']),
+                     e_vectors=np.array(self.log_data['e_vectors']),
+                     gradients=np.array(self.log_data['gradients']),
+                     modes=np.array(self.log_data['modes']),
+                     energies=np.array(self.log_data['energies']))
+            print(f"Trajectory log saved to {filename}")
+        except Exception as e:
+            print(f"Failed to save trajectory log: {e}")

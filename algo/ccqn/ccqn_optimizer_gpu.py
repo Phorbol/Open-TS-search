@@ -184,6 +184,62 @@ class CCQNGPUOptimizer(Optimizer):
               dot_vv = np.sum(v_ij * v_ij, axis=1) 
               p_ij_num = v_ij * (dot_vj/dot_vv)[:,None] - v_ij * (dot_vi/dot_vv)[:,None] 
               
+              # --- DEBUG: Bond Analysis ---
+              # Only print if debug_mode is enabled in the driver
+              if hasattr(self, 'driver') and getattr(self.driver, 'debug_mode', False):
+                  # Check current mode from driver
+                  current_mode = getattr(self.driver, 'mode', 'unknown').upper()
+                  print(f"\n[CCQN Debug] Step {getattr(self.driver, 'nsteps', '?')} ({current_mode}) | E-Vector Construction:")
+                  for k, (i, j) in enumerate(zip(i_idx, j_idx)):
+                      # Current Bond Length
+                      dist = np.linalg.norm(v_ij[k])
+                      v_hat = v_ij[k] / dist
+                      
+                      # Force Projection: (f_j - f_i) . v_hat
+                      # Positive = Repulsive/Expanding Force (Downhill is to expand)
+                      # Negative = Attractive/Restoring Force (Downhill is to contract)
+                      f_diff = forces[j] - forces[i]
+                      f_proj = np.sum(f_diff * v_hat)
+                      
+                      # E-vector logic:
+                      # CCQN constructs E to oppose the force? 
+                      # p_ij aligns with v_hat if f_proj > 0.
+                      # E contribution: E_j += p_ij, E_i -= p_ij => Delta(r_j - r_i) ~ 2 * p_ij
+                      # So if f_proj > 0 (Repulsive), E points to Expand.
+                      # Wait! Standard logic: E aligns with force? 
+                      # Let's check p_ij sign: p_ij ~ v * (f_diff . v) / v^2
+                      # So p_ij is PARALLEL to force difference.
+                      # So E vector points DOWNHILL along the force.
+                      # BUT! The Solver minimizes Energy.
+                      # To climb, we usually need E to point UPHILL?
+                      # Let's verify observation: "Normally E points along mode".
+                      # If E follows force, it points to reactant well.
+                      # Constraint: s . e > 0. 
+                      # If e points downhill, s must have downhill component.
+                      # This implies CCQN assumes e points to PRODUCT?
+                      # Actually: In standard CCQN/P-RFO, the mode is the Hessian eigenvector with negative curvature.
+                      # Here we construct it from forces. 
+                      # Empirically: If bond is stretched, force pulls back (Negative f_proj).
+                      # p_ij opposes v_hat. E points to CONTRACT.
+                      # This seems to contradict "breaking bond".
+                      # UNLESS: The force used here is the *negative* of the gradient?
+                      # ASE get_forces() returns -Gradient. 
+                      # So if atoms attract, Force is negative? No.
+                      # Force on J from I is attractive -> points to I (-v_ij).
+                      # Force on I from J is attractive -> points to J (+v_ij).
+                      # f_j - f_i = (-v) - (v) = -2v.
+                      # f_proj is Negative.
+                      # p_ij is Negative (opposes v).
+                      # E_j += p_ij (moves J towards I). E_i -= p_ij (moves I towards J).
+                      # So E points to CONTRACT.
+                      # This means s . e > 0 enforces CONTRACTION?
+                      # This suggests for bond breaking, we might need to FLIP e_vector 
+                      # OR the force is actually repulsive at the start?
+                      
+                      status = "EXPANDING (Repulsive Force)" if f_proj > 0 else "CONTRACTING (Restoring Force)"
+                      print(f"  Bond {i}-{j}: L={dist:.4f} A, F_proj={f_proj:.4f} eV/A -> {status}")
+              # ----------------------------
+
               E = np.zeros_like(coords) 
               if self.ic_mode == 'democratic': 
                   norm_p = np.linalg.norm(p_ij_num, axis=1) 
@@ -195,7 +251,30 @@ class CCQNGPUOptimizer(Optimizer):
               else: 
                   np.add.at(E, i_idx, p_ij_num) 
                   np.add.at(E, j_idx, -p_ij_num) 
-                  
+              
+              # --- DEBUG: E-Vector Effect Analysis ---
+              if hasattr(self, 'driver') and getattr(self.driver, 'debug_mode', False):
+                   print(f"  E-Vector Net Effect on Bonds:")
+                   e_temp = E.flatten()
+                   # Predict step along E
+                   step_test = e_temp * 0.1 # Small step
+                   step_test_Rs = step_test.reshape(-1, 3)
+                   
+                   for k, (i, j) in enumerate(zip(i_idx, j_idx)):
+                       r_i, r_j = coords[i], coords[j]
+                       dr = r_j - r_i
+                       dist_old = np.linalg.norm(dr)
+                       
+                       # New positions
+                       r_i_new = r_i + step_test_Rs[i]
+                       r_j_new = r_j + step_test_Rs[j]
+                       dist_new = np.linalg.norm(r_j_new - r_i_new)
+                       
+                       delta = dist_new - dist_old
+                       effect = "LENGTHENING" if delta > 0 else "SHORTENING"
+                       print(f"    Bond {i}-{j}: E-vec points to {effect} (Delta ~ {delta:.1e})")
+              # ---------------------------------------
+
               e = E.flatten() 
               n = np.linalg.norm(e) 
               return e/n if n > 1e-8 else e 
