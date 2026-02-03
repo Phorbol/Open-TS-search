@@ -4,6 +4,7 @@ from ase.optimize.optimize import Optimizer
 from ase.geometry import find_mic
 from algo.ccqn.gpu_components.ccqn_gpu_driver import CCQNGPUDriver
 from algo.shared.reproducibility import set_deterministic
+from algo.ccqn.gpu_components.e_vector_generator import EVectorGenerator
 
 class CCQNGPUOptimizer(Optimizer):
     """
@@ -40,7 +41,7 @@ class CCQNGPUOptimizer(Optimizer):
     """
     def __init__(self, atoms, restart=None, logfile='-', trajectory=None, master=None,
                  e_vector_method='interp', product_atoms=None, reactive_bonds=None,
-                 ic_mode='democratic', cos_phi=0.5, trust_radius_uphill=0.1,
+                 ic_mode='democratic', ic_gamma=None, cos_phi=0.5, trust_radius_uphill=0.1,
                  trust_radius_saddle_initial=0.05, hessian_update='ts-bfgs',
                  idpp_images=7, use_idpp=False, hessian=False,
                  gpu_hessian_manager=None, gpu_uphill_solver=None, gpu_prfo_solver=None,
@@ -51,7 +52,9 @@ class CCQNGPUOptimizer(Optimizer):
                  uphill_use_alm=False,
                  uphill_use_adam=False,
                  uphill_lr=0.01,
-                 debug_mode=False):
+                 debug_mode=False,
+                 # New Parameter for Robust E-Vector
+                 use_robust_e_vector=False):
         super().__init__(atoms, restart, logfile, trajectory, master)
         
         # Enforce deterministic behavior
@@ -65,10 +68,34 @@ class CCQNGPUOptimizer(Optimizer):
         self.e_vector_method = e_vector_method
         self.hessian = hessian
         self.ic_mode = ic_mode.lower()
+
+        # Resolve ic_gamma for unified e-vector calculation
+        if ic_gamma is not None:
+            self.ic_gamma = float(ic_gamma)
+        else:
+            # Backward compatibility: Map mode to gamma
+            if self.ic_mode == 'democratic':
+                self.ic_gamma = 1.0
+            elif self.ic_mode == 'weighted':
+                self.ic_gamma = 0.0
+            else:
+                # Default to democratic if unknown, matching default ic_mode
+                self.ic_gamma = 1.0
+                
         self.product_atoms = product_atoms
         self.reactive_bonds = reactive_bonds
         self.idpp_images = idpp_images
         self.use_idpp = use_idpp
+        
+        # Initialize E-Vector Generator (Optional)
+        self.e_vector_generator = None
+        # Enable if explicitly requested OR if reactive_bonds has 3-element tuples (new format)
+        has_new_format = reactive_bonds and len(reactive_bonds) > 0 and len(reactive_bonds[0]) == 3
+        if use_robust_e_vector or has_new_format:
+            if reactive_bonds:
+                self.e_vector_generator = EVectorGenerator(reactive_bonds)
+                if self.logfile:
+                    self.logfile.write("CCQN: Enabled Robust Markovian E-Vector Generator.\n")
         
         # Initialize Driver
         if driver:
@@ -135,11 +162,16 @@ class CCQNGPUOptimizer(Optimizer):
         e_vec_np = None
         
         if not use_gpu_evec:
-            # Legacy CPU path
+            # Legacy CPU path or New Generator path
             if self.driver.mode == 'uphill':
-                 e_vec_np = self._calculate_e_vector_cpu(f, x_k_np)
+                 if self.e_vector_generator:
+                     e_vec_np = self.e_vector_generator.compute(self.atoms, f)
+                 else:
+                     e_vec_np = self._calculate_e_vector_cpu(f, x_k_np)
             
             def e_vector_provider():
+                if self.e_vector_generator:
+                    return self.e_vector_generator.compute(self.atoms, f)
                 return self._calculate_e_vector_cpu(f, x_k_np)
                 
             # Execute step via Driver
@@ -187,9 +219,15 @@ class CCQNGPUOptimizer(Optimizer):
               # --- DEBUG: Bond Analysis ---
               # Only print if debug_mode is enabled in the driver
               if hasattr(self, 'driver') and getattr(self.driver, 'debug_mode', False):
+                  # Calculate p_k norms for scale analysis
+                  p_norms = np.linalg.norm(p_ij_num, axis=1)
+                  max_p = np.max(p_norms) if len(p_norms) > 0 else 0.0
+                  min_p = np.min(p_norms) if len(p_norms) > 0 else 0.0
+                  R_val = max_p / (min_p + 1e-8)
+
                   # Check current mode from driver
                   current_mode = getattr(self.driver, 'mode', 'unknown').upper()
-                  print(f"\n[CCQN Debug] Step {getattr(self.driver, 'nsteps', '?')} ({current_mode}) | E-Vector Construction:")
+                  print(f"\n[CCQN Debug] Step {getattr(self.driver, 'nsteps', '?')} ({current_mode}) | E-Vector Construction (R={R_val:.2f}):")
                   for k, (i, j) in enumerate(zip(i_idx, j_idx)):
                       # Current Bond Length
                       dist = np.linalg.norm(v_ij[k])
@@ -237,20 +275,34 @@ class CCQNGPUOptimizer(Optimizer):
                       # OR the force is actually repulsive at the start?
                       
                       status = "EXPANDING (Repulsive Force)" if f_proj > 0 else "CONTRACTING (Restoring Force)"
-                      print(f"  Bond {i}-{j}: L={dist:.4f} A, F_proj={f_proj:.4f} eV/A -> {status}")
+                      print(f"  Bond {i}-{j}: L={dist:.4f} A, F_proj={f_proj:.4f} eV/A, |p_k|={p_norms[k]:.4f} -> {status}")
               # ----------------------------
 
               E = np.zeros_like(coords) 
-              if self.ic_mode == 'democratic': 
-                  norm_p = np.linalg.norm(p_ij_num, axis=1) 
-                  valid2 = norm_p > 1e-8 
-                  if np.sum(valid2) > 0: 
-                      p_ij = p_ij_num[valid2] / norm_p[valid2][:,None] 
-                      np.add.at(E, i_idx[valid2], p_ij) 
-                      np.add.at(E, j_idx[valid2], -p_ij) 
-              else: 
-                  np.add.at(E, i_idx, p_ij_num) 
-                  np.add.at(E, j_idx, -p_ij_num) 
+              
+              # Unified Gamma Approach: p_ij = p_ij_num / ||p_ij_num||^gamma
+              # gamma=1 -> Democratic (Normalized)
+              # gamma=0 -> Weighted (Raw Force Projection)
+              norm_p = np.linalg.norm(p_ij_num, axis=1) 
+              valid2 = norm_p > 1e-8 
+              
+              if np.sum(valid2) > 0: 
+                  p_subset = p_ij_num[valid2]
+                  n_subset = norm_p[valid2]
+                  
+                  if abs(self.ic_gamma) < 1e-6:
+                      # Weighted (gamma=0): scale = 1
+                      p_ij = p_subset
+                  elif abs(self.ic_gamma - 1.0) < 1e-6:
+                      # Democratic (gamma=1): scale = 1/norm
+                      p_ij = p_subset / n_subset[:, None]
+                  else:
+                      # General Gamma: scale = 1/(norm^gamma)
+                      scale = 1.0 / np.power(n_subset, self.ic_gamma)
+                      p_ij = p_subset * scale[:, None]
+
+                  np.add.at(E, i_idx[valid2], p_ij) 
+                  np.add.at(E, j_idx[valid2], -p_ij) 
               
               # --- DEBUG: E-Vector Effect Analysis ---
               if hasattr(self, 'driver') and getattr(self.driver, 'debug_mode', False):
