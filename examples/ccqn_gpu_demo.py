@@ -3,7 +3,7 @@ import sys
 from ase.io import read
 
 # Ensure we can import from the repo root
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 try:
     from mace.calculators import MACECalculator
@@ -11,7 +11,7 @@ except ImportError:
     print("MACE not installed. Skipping demo.")
     sys.exit(0)
 
-from algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
+from open_ts_search.algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
 
 def main():
     # Load the initial structure

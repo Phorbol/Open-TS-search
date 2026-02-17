@@ -1,6 +1,6 @@
 from ase.build import molecule
 from ase.io import write
-from shared.interp import robust_interpolate, Vectorized_ASE_IDPPSolver
+from open_ts_search.shared.interp import robust_interpolate, Vectorized_ASE_IDPPSolver
 
 def make_endpoints():
     start = molecule('H2')

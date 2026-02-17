@@ -1,11 +1,11 @@
 import sys
 import os
 # Add project root to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 from ase.build import molecule
 from ase.calculators.emt import EMT
-from shared.irc import get_clean_irc_path, plot_irc
+from open_ts_search.shared.irc import get_clean_irc_path, plot_irc
 
 def run_irc():
     try:

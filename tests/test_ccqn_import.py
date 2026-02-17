@@ -1,3 +1,3 @@
 def test_import_modules():
-    import algo.ccqn.ccqn_optimizer
-    import algo.ccqn.components
+    import open_ts_search.algo.ccqn.ccqn_optimizer
+    import open_ts_search.algo.ccqn.components

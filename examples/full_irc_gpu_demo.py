@@ -5,10 +5,10 @@ from ase.io import read
 from ase.constraints import FixAtoms
 
 # Ensure we can import from the repo root
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from shared import TSDescentOptimizer, get_vib_mode, plot_descent_profile, get_clean_irc_path, plot_irc
-from algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
+from open_ts_search.shared import TSDescentOptimizer, get_vib_mode, plot_descent_profile, get_clean_irc_path, plot_irc
+from open_ts_search.algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
 
 try:
     from mace.calculators import MACECalculator

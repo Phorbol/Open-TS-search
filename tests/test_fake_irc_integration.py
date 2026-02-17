@@ -6,7 +6,7 @@ from ase.constraints import FixAtoms
 import sys
 import os
 sys.path.append(os.getcwd())
-from shared import TSDescentOptimizer, get_vib_mode, plot_descent_profile
+from open_ts_search.shared import TSDescentOptimizer, get_vib_mode, plot_descent_profile
 
 class TestFakeIRC(unittest.TestCase):
     def setUp(self):

@@ -1,6 +1,6 @@
 def test_create_ccqn_with_components():
-    from registry.factory import create_ccqn
-    from algo.ccqn.components import _DirectionProvider
+    from open_ts_search.registry.factory import create_ccqn
+    from open_ts_search.algo.ccqn.components import _DirectionProvider
     from ase.build import molecule
     mol = molecule('H2')
     opt = create_ccqn(

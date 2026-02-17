@@ -1,0 +1,16 @@
+numpy>=1.26.0
+scipy>=1.15.0
+ase>=3.26.0
+matplotlib>=3.10.6
+torch>=2.8.0
+
+[dev]
+pytest>=9.0.1
+black
+flake8
+
+[irc]
+sella>=2.3.5
+
+[ml]
+mace-torch>=0.3.14

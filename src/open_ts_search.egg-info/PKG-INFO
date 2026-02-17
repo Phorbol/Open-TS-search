@@ -1,0 +1,155 @@
+Metadata-Version: 2.4
+Name: open-ts-search
+Version: 0.1.0
+Summary: A modular transition state search library for scientific computing and AI4S
+Author: Trae Research
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: scipy>=1.15.0
+Requires-Dist: ase>=3.26.0
+Requires-Dist: matplotlib>=3.10.6
+Requires-Dist: torch>=2.8.0
+Provides-Extra: irc
+Requires-Dist: sella>=2.3.5; extra == "irc"
+Provides-Extra: ml
+Requires-Dist: mace-torch>=0.3.14; extra == "ml"
+Provides-Extra: dev
+Requires-Dist: pytest>=9.0.1; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Open-TS-search
+
+## Overview
+- Transition state search tooling with a modular architecture:
+  - Shared, algorithm-agnostic utilities (interpolation/IDPP, IRC, frequency)
+  - Core TS components (Hessian, PRFO, trust region, convergence)
+  - CCQN-specific optimizer, components, phases, and contexts
+- Dependencies are imported lazily inside functions where possible to minimize global load.
+
+## Installation
+
+### Basic Installation
+```bash
+pip install .
+```
+
+### Full Installation (with IRC and ML support)
+```bash
+pip install .[irc,ml]
+```
+
+### Development Installation
+```bash
+pip install -e .[dev,irc,ml]
+```
+
+## Directory Structure
+- shared/
+  - interp.py: robust_interpolate, Vectorized_ASE_IDPPSolver
+  - irc.py: get_clean_irc_path, mass_weighted_path, combine_irc, plot_irc
+  - freq.py: ase_vib (imaginary frequency analysis and animation export)
+- core/ts_components/
+  - hessian_ts_bfgs.py
+  - prfo_solver.py
+  - trust_linear.py
+  - convergence_prfo.py
+- algo/ccqn/
+  - ccqn_optimizer.py
+  - components/
+    - config.py, state_tracker.py, hessian_manager.py
+    - direction_ccqn.py, prfo_solver_ccqn.py, trust_manager_ccqn.py
+    - ccqn_mode.py, ccqn_uphill.py, ccqn_convergence.py
+  - contexts/step_context.py
+  - phases/uphill_phase.py, phases/prfo_phase.py
+- registry/
+  - components.py, factory.py
+- examples/
+  - README.md
+  - interp_demo.py, freq_demo.py, irc_demo.py
+
+## Shared Utilities
+- Interpolation & IDPP (shared/interp.py)
+  - robust_interpolate: PBC-aware linear interpolation
+  - Vectorized_ASE_IDPPSolver: fully vectorized IDPP path refinement
+- IRC (shared/irc.py)
+  - get_clean_irc_path: forward/reverse runs, path stitching
+  - mass_weighted_path, plot_irc: analysis and visualization
+  - Requires sella; demos skip gracefully if missing
+- Frequency (shared/freq.py)
+  - ase_vib: imaginary frequency count and animated mode export
+  - Uses ASE Vibrations; imports are inside the function
+
+## CCQN Architecture
+- CCQNOptimizer orchestrates the flow (Hessian update, mode switching, logging, state)
+- Phases:
+  - UphillPhase: e-vector selection (interp/IDPP or IC) + constrained step
+  - PRFOPhase: rho quality, trust radius update, PRFO step
+- Components are single-responsibility files for easy maintenance and replacement.
+
+
+
+## GPU Acceleration with MACE
+For heavy workloads, you can use the GPU-accelerated optimizer with ML potentials like MACE:
+
+```python
+import os
+from ase.io import read
+from mace.calculators import MACECalculator
+from algo.ccqn.ccqn_optimizer_gpu import CCQNGPUOptimizer
+
+# Load structure
+atoms = read('examples/IS.cif', index=-1)
+
+# Initialize MACE Calculator (requires mace-torch installed)
+atoms.calc = MACECalculator(
+    model_paths='/path/to/mace.model',
+    device='cuda',
+    default_dtype='float32'
+)
+
+# Initialize CCQN GPU Optimizer
+opt = CCQNGPUOptimizer(
+    atoms,
+    uphill_use_slsqp=False,
+    uphill_use_alm=False,
+    uphill_use_adam=False,
+    uphill_max_iter=500,
+    reactive_bonds=[(23, 24), (24, 317)],
+    e_vector_method='ic',
+    cos_phi=0.3,
+    trajectory='ccqn.traj'
+)
+opt.run(fmax=0.05, steps=500)
+```
+
+## Examples
+- Interp/IDPP demo: examples/interp_demo.py
+- Frequency demo: examples/freq_demo.py
+- IRC demo: examples/irc_demo.py
+- CCQN GPU demo: examples/ccqn_gpu_demo.py
+- Full Freq & IRC GPU demo: examples/full_irc_gpu_demo.py
+  - If sella is not installed, the script will print a message and exit without error.
+
+## Notes
+- Keep utilities algorithm-agnostic in shared/ for reuse across TS methods.
+- CCQN-specific behavior (cone constraints, logging) lives under algo/ccqn/.

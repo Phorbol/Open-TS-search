@@ -1,6 +1,6 @@
 from ase.build import molecule
 from ase.calculators.emt import EMT
-from shared.freq import ase_vib
+from open_ts_search.shared.freq import ase_vib
 
 def run_freq():
     mol = molecule('H2')

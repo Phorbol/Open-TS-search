@@ -10,7 +10,8 @@ if os.path.exists("README.md"):
 setup(
     name="open-ts-search",
     version="0.1.0",
-    packages=find_packages(),
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
     install_requires=[
         "numpy>=1.26.0",
         "scipy>=1.15.0",

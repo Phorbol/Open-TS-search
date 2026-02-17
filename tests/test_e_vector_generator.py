@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from ase import Atoms
-from algo.ccqn.gpu_components.e_vector_generator import EVectorGenerator
+from open_ts_search.algo.ccqn.gpu_components.e_vector_generator import EVectorGenerator
 
 class TestEVectorGenerator(unittest.TestCase):
     

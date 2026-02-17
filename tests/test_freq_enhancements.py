@@ -6,7 +6,7 @@ from ase.constraints import FixAtoms
 import sys
 import os
 sys.path.append(os.getcwd())
-from shared.freq import get_vib_mode
+from open_ts_search.shared.freq import get_vib_mode
 
 class TestGetVibMode(unittest.TestCase):
     def setUp(self):
